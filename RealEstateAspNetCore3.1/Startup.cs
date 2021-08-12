@@ -1,8 +1,10 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using RealEstateAspNetCore3._1.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +24,9 @@ namespace RealEstateAspNetCore3._1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Net Core 'de Database'e bağlantyı sağlayan kod : Option parametre'e üzerinden defaultCon string'ini burda 
+            // alıp DataContext sınınıfa gönderir
+            services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("defaultCon")));
             services.AddControllersWithViews();
         }
 
