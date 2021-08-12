@@ -13,6 +13,19 @@ namespace RealEstateAspNetCore3._1.Models
         {
 
         }
+        // Model ve database ile bağlantı kısmı 
+        // public DbSet<ModelAdı> tabloadı {get; set;}
+
+        public DbSet<Status> Status { get; set; }
+
+        public DbSet<Tip> Tips { get; set; }
+
+        public DbSet<Advertisement> advertisements { get; set; }
+        public DbSet<AdvPhoto> advPhotos { get; set; }
+        public DbSet<City> cities { get; set; }
+        public DbSet<District> districts { get; set; }
+
+        public DbSet<Neighborhood> neighborhoods { get; set; }
 
 
     }
