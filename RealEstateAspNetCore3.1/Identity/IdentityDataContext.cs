@@ -7,10 +7,13 @@ using System.Threading.Tasks;
 
 namespace RealEstateAspNetCore3._1.Identity
 {
-    public class IdentityDataContext : IdentityDbContext<ApplicationUser>
+    // apllication user ve rol birbirne bağlar  ve vertabınının bağlantısı sağlar 
+    public class IdentityDataContext : IdentityDbContext<ApplicationUser , ApplicationRole , string>
     {
         public IdentityDataContext(DbContextOptions options) : base(options)
         {
+           
+
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,13 +29,17 @@ namespace RealEstateAspNetCore3._1
             // Net Core 'de Database'e bağlantyı sağlayan kod : Option parametre'e üzerinden defaultCon string'ini burda 
             // alıp DataContext sınınıfa gönderir
             services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("defaultCon")));
+            // Identity bağlantısına konfigrasyon yapıyor 
             services.AddDbContext<IdentityDataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
-
+            // Bütün User ve Rol arasındaki ilişkleri sağalr 
+            services.AddIdentity<ApplicationUser, ApplicationRole>().AddDefaultTokenProviders()
+                .AddEntityFrameworkStores<IdentityDataContext>();
             services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env ,
+            UserManager<ApplicationUser> userManger, RoleManager<ApplicationRole> roleManager)
         {
             if (env.IsDevelopment())
             {
@@ -44,6 +49,9 @@ namespace RealEstateAspNetCore3._1
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            // proje ilk başladığında Seed fonksyonunu çalıştırır 
+            IdentityInitilizer.Seed(userManger, roleManager);
+
             app.UseStaticFiles();
 
             app.UseRouting();
