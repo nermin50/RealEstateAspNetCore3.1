@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using RealEstateAspNetCore3._1.Identity;
 using RealEstateAspNetCore3._1.Models;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,8 @@ namespace RealEstateAspNetCore3._1
             // Net Core 'de Database'e bağlantyı sağlayan kod : Option parametre'e üzerinden defaultCon string'ini burda 
             // alıp DataContext sınınıfa gönderir
             services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("defaultCon")));
+            services.AddDbContext<IdentityDataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
+
             services.AddControllersWithViews();
         }
 
