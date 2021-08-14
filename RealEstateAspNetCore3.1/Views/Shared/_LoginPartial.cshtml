@@ -5,31 +5,43 @@
 @inject UserManager<ApplicationUser> UserManager
 
 
-<div style="padding-top:10px;">
 
 
-    @if (User.Identity.IsAuthenticated)
-    {
-    <div class="row">
+
+@if (User.Identity.IsAuthenticated)
+{
+    @*<div class="row">
 
         <div class="col-md-8">
-            <a id="manage" class="nav-link text-dark btn btn-success" title="Welcome">Hello @UserManager.GetUserName(User)..!</a>
-        </div>
-        <div class="col-md-4">
-            <form id="logoutForm" class="form-inline " asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button id="logout" type="submit" class="nav-link btn btn-danger text-dark">Logout</button>
-            </form>
-        </div>
-    </div>
-    }
-    else
+            <div class="row">*@
+    @if (User.IsInRole("admin"))
     {
-
-        <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-primary text-dark"><i class="fa fa-sign-in" aria-hidden="true"> </i> Register</a>
-
-
-        <a id="login" asp-area="Identity" asp-page="/Account/Login" class="btn btn-success"><i class="fa fa-users"></i>Login</a>
+        <li>  <a class="btn btn-group-sm" href="#">Admin Panel </a></li>
 
     }
+    <li> <a id="manage" class="btn btn-link" title="Welcome">Hello @UserManager.GetUserName(User)..!</a></li>
 
-</div>
+    @*</div>
+        </div>*@
+    <div class=" nav navbar-nav navbar-right " style="padding-top:10px;">
+        <form id="logoutForm" class="form-inline " asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button id="logout" type="submit" class="nav-link btn btn-danger text-dark">Logout</button>
+        </form>
+    </div>
+    @*</div>*@
+}
+else
+{
+
+    <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-primary text-dark" style="margin-top:10px;"><i class="fa fa-sign-in" aria-hidden="true"> </i> Register</a>
+
+
+    <a id="login" asp-area="Identity" asp-page="/Account/Login" class="btn btn-success" style="margin-top: 10px;"><i class="fa fa-users"></i>Login</a>
+
+}
+
+
+
+
+
+

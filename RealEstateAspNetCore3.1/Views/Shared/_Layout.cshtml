@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using RealEstateAspNetCore3._1.Identity
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -28,6 +34,7 @@
                             <span class="icon-bar"></span>
                         </button>
                         <a class="navbar-brand" style="padding:10px" href="/Home/index"><img src="/images/logo.png" width="110" height="35" /> </a>
+                     
                     </div>
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -51,18 +58,20 @@
                                 </ul>
                             </li>
                         </ul>
-                        <ul class="nav navbar-nav navbar-right">
+                        <ul class="nav navbar-nav navbar-right" style="padding-right:10px;">
                             <!--Burda Giriş kontrulunu yaptıktan sonra  Eğer kullanıcı Gönderidiği girişi talep'i doğru ise (isAuthenticated)
-                            ondan sonra Kullanıcının Roluna göre-->
+    ondan sonra Kullanıcının Roluna göre-->
                             @*<div class="nav navbar-nav navbar-right" style="padding:10px">
-                                <a asp-area="Idenitiy" asp-page="/Account/Register" class="btn btn-primary"><i class="fa fa-sign-in" aria-hidden="true"></i> Register </a>
-                                <a asp-area="Idenitiy" asp-page="/Account/Login"  class="btn btn-success"><i class="fa fa-users"></i> Login </a>
+            <a asp-area="Idenitiy" asp-page="/Account/Register" class="btn btn-primary"><i class="fa fa-sign-in" aria-hidden="true"></i> Register </a>
+            <a asp-area="Idenitiy" asp-page="/Account/Login"  class="btn btn-success"><i class="fa fa-users"></i> Login </a>
 
-                                <a href="/Account/Login" class="btn btn-info"><i class="fa fa-bullhorn" aria-hidden="true"></i> Create adv </a>
-                            </div>*@
-                            <partial name="_LoginPartial" />
-
-
+            <a href="/Account/Login" class="btn btn-info"><i class="fa fa-bullhorn" aria-hidden="true"></i> Create adv </a>
+        </div>*@
+                           
+                              
+                                    <partial name="_LoginPartial" />
+                            
+                               
                         </ul>
 
 
