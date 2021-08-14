@@ -62,6 +62,7 @@ namespace RealEstateAspNetCore3._1
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
