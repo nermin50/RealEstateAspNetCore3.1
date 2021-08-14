@@ -34,7 +34,18 @@ namespace RealEstateAspNetCore3._1
             // Bütün User ve Rol arasındaki ilişkleri sağalr 
             services.AddIdentity<ApplicationUser, ApplicationRole>().AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<IdentityDataContext>();
-            services.AddControllersWithViews();
+
+            // RunCompilatiion : yani kod'da eğer bir değişiklik yaparsak (HTML'de) kodların değişiklerini kaydedip sadece sayfayı yenilenmye ihtiyacımız var
+            // yeniden çalıştırmasına gerek yok 
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+            //giriş yapan kullanıcının bilgilerini geçici olarak browser'de tutar 
+            services.AddAuthentication("CookieAuthentication")
+                 .AddCookie("CookieAuthentication", config =>
+                 {
+                     config.Cookie.Name = "UserLoginCookie";
+                     config.LoginPath = "/Login/UserLogin";
+                 });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
