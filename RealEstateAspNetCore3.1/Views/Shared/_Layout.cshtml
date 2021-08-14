@@ -54,12 +54,13 @@
                         <ul class="nav navbar-nav navbar-right">
                             <!--Burda Giriş kontrulunu yaptıktan sonra  Eğer kullanıcı Gönderidiği girişi talep'i doğru ise (isAuthenticated)
                             ondan sonra Kullanıcının Roluna göre-->
-                            <div class="nav navbar-nav navbar-right" style="padding:10px">
-                                <a asp-controller="Account" asp-action="Register" class="btn btn-primary"><i class="fa fa-sign-in" aria-hidden="true"></i> Register </a>
-                                <a href="/Account/Login" class="btn btn-success"><i class="fa fa-users"></i> Login </a>
+                            @*<div class="nav navbar-nav navbar-right" style="padding:10px">
+                                <a asp-area="Idenitiy" asp-page="/Account/Register" class="btn btn-primary"><i class="fa fa-sign-in" aria-hidden="true"></i> Register </a>
+                                <a asp-area="Idenitiy" asp-page="/Account/Login"  class="btn btn-success"><i class="fa fa-users"></i> Login </a>
 
                                 <a href="/Account/Login" class="btn btn-info"><i class="fa fa-bullhorn" aria-hidden="true"></i> Create adv </a>
-                            </div>
+                            </div>*@
+                            <partial name="_LoginPartial" />
 
 
                         </ul>

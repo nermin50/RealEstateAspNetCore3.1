@@ -1,0 +1,32 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using RealEstateAspNetCore3._1.Identity
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+
+<div style="padding-top:10px;">
+
+
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+        </li>
+        <li class="nav-item">
+            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+            </form>
+        </li>
+    }
+    else
+    {
+
+        <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-primary text-dark"><i class="fa fa-sign-in" aria-hidden="true"> </i> Register</a>
+
+
+        <a id="login" asp-area="Identity" asp-page="/Account/Login" class="btn btn-success"><i class="fa fa-users"></i>Login</a>
+
+    }
+
+</div>

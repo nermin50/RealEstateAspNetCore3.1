@@ -39,13 +39,7 @@ namespace RealEstateAspNetCore3._1
             // yeniden çalıştırmasına gerek yok 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
-            //giriş yapan kullanıcının bilgilerini geçici olarak browser'de tutar 
-            services.AddAuthentication("CookieAuthentication")
-                 .AddCookie("CookieAuthentication", config =>
-                 {
-                     config.Cookie.Name = "UserLoginCookie";
-                     config.LoginPath = "/Login/UserLogin";
-                 });
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,6 +68,7 @@ namespace RealEstateAspNetCore3._1
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }
