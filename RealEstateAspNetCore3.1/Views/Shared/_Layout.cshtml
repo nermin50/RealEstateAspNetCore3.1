@@ -58,20 +58,10 @@
                                 </ul>
                             </li>
                         </ul>
-                        <ul class="nav navbar-nav navbar-right" style="padding-right:10px;">
-                            <!--Burda Giriş kontrulunu yaptıktan sonra  Eğer kullanıcı Gönderidiği girişi talep'i doğru ise (isAuthenticated)
-    ondan sonra Kullanıcının Roluna göre-->
-                            @*<div class="nav navbar-nav navbar-right" style="padding:10px">
-            <a asp-area="Idenitiy" asp-page="/Account/Register" class="btn btn-primary"><i class="fa fa-sign-in" aria-hidden="true"></i> Register </a>
-            <a asp-area="Idenitiy" asp-page="/Account/Login"  class="btn btn-success"><i class="fa fa-users"></i> Login </a>
-
-            <a href="/Account/Login" class="btn btn-info"><i class="fa fa-bullhorn" aria-hidden="true"></i> Create adv </a>
-        </div>*@
-                           
-                              
+                        <ul class="nav navbar-nav navbar-right" style="padding-right:10px;">        
+                              @*Login partial sayfasini yukler*@ 
                                     <partial name="_LoginPartial" />
-                            
-                               
+                                                       
                         </ul>
 
 

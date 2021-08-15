@@ -20,11 +20,14 @@ namespace RealEstateAspNetCore3._1.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
+        // sign manager : bir oturum açmak için kullanılır
         private readonly SignInManager<ApplicationUser> _signInManager;
+        // user manager : application use'in özeliklerini üzerinden kullanabiliriz 
         private readonly UserManager<ApplicationUser> _userManager;
+        // logger : işlemeri bir log(sicil ) içinden kayderder 
         private readonly ILogger<RegisterModel> _logger;
-       
 
+        #region Register'in konstraktoru 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
@@ -36,14 +39,24 @@ namespace RealEstateAspNetCore3._1.Areas.Identity.Pages.Account
             _logger = logger;
           
         }
+        #endregion
 
+
+        #region Yardımcı değişkenler 
         [BindProperty]
+        // inputten gelene veriyi tutar
         public InputModel Input { get; set; }
-
-        public string ReturnUrl { get; set; }
-
+        // eğer harici giriş kullancaksak : facebook , twitter ... vs 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
+        // oturum açıldığı sayfaının linkini tutar : yani eğer kullanıcı ilanın sayfasından giriş yaparsa
+        // / giriş yaptıktan sonra ayni ilan sayfasına yönlendirir 
+        public string ReturnUrl { get; set; }
+        // hata mesaji 
+        [TempData]
+        public string ErrorMessage { get; set; }
+        #endregion
 
+        // Registir Modeli
         public class InputModel
         {
             [Required]
@@ -63,49 +76,45 @@ namespace RealEstateAspNetCore3._1.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
         }
 
+        // Register html sayfasını  Getir
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
+        // Registr post : Register Buttonuna tıkladığımızda bu fonksyon çalışır 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            // Register'in yapıldığı sayfaının linki 
             returnUrl = returnUrl ?? Url.Content("~/");
+            // Harici linkten   kayt oluşturursak : facebook twitter üzerinden 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
+                //Yeni application oluştur
                 var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
+                //  kullanıcının şifresine Hash (şifreleme ) yapar : şifreyi teextten Hexadecimal'e çevirir 
                 var result = await _userManager.CreateAsync(user, Input.Password);
+                // eğer oluşrurmada bir hata çıklazsa true 
                 if (result.Succeeded)
                 {
+                    //kaut oluşturludu 
                     _logger.LogInformation("User created a new account with password.");
+                    //Giriş Yap 
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    // sayfaya yönlendir 
+                    return LocalRedirect(returnUrl);
 
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
-                        protocol: Request.Scheme);
-
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
-                    {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
-                    }
-                    else
-                    {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
-                    }
                 }
+                // eğer bir hata oluştu ise bu hatayı göster : birden fazla hata varsa hepsni listeler
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
 
-            // If we got this far, something failed, redisplay form
+            // Her hangi bir hata oluştu ise ayni sayfayı aç 
             return Page();
         }
     }

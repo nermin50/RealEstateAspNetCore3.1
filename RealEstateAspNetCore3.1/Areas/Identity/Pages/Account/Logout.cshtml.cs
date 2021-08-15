@@ -17,18 +17,23 @@ namespace RealEstateAspNetCore3._1.Areas.Identity.Pages.Account
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<LogoutModel> _logger;
 
+        #region Logout constructor 
         public LogoutModel(SignInManager<ApplicationUser> signInManager, ILogger<LogoutModel> logger)
         {
             _signInManager = signInManager;
             _logger = logger;
         }
+        #endregion
 
+        // Log out sayfasını getir  [HttpGet]
         public void OnGet()
         {
         }
+        //Log out Post [HttpPost]
 
         public async Task<IActionResult> OnPost(string returnUrl = null)
         {
+            // girişi oturumunu sonlandırır 
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
             if (returnUrl != null)

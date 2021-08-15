@@ -1,5 +1,8 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿@*Identity paketlerini yükler*@
+@using Microsoft.AspNetCore.Identity
 @using RealEstateAspNetCore3._1.Identity
+
+@*burda Application user'in kütüphanesini yükler*@
 
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
@@ -7,13 +10,10 @@
 
 
 
-
+@*// Eğer girişi yapıldı ise*@ 
 @if (User.Identity.IsAuthenticated)
 {
-    @*<div class="row">
-
-        <div class="col-md-8">
-            <div class="row">*@
+ //   Eğer girişi yapan kullanıcı Admin ise bu linkleri göster ( sadece admin için
     @if (User.IsInRole("admin"))
     {
         <li>  <a class="btn btn-group-sm" href="#">Admin Panel </a></li>
@@ -21,15 +21,15 @@
     }
     <li> <a id="manage" class="btn btn-link" title="Welcome">Hello @UserManager.GetUserName(User)..!</a></li>
 
-    @*</div>
-        </div>*@
+   // burdaki linkler admin ve normal kullanıcı için gösterir
     <div class=" nav navbar-nav navbar-right " style="padding-top:10px;">
         <form id="logoutForm" class="form-inline " asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
             <button id="logout" type="submit" class="nav-link btn btn-danger text-dark">Logout</button>
         </form>
     </div>
-    @*</div>*@
+   
 }
+// eğer giriş yapılmadı ise Login ve Register buttonları gösteriri
 else
 {
 

@@ -18,10 +18,16 @@ namespace RealEstateAspNetCore3._1.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
+        // user manager : application use'in özeliklerini üzerinden kullanabiliriz 
         private readonly UserManager<ApplicationUser> _userManager;
+        // sign manager : bir oturum açmak için kullanılır 
         private readonly SignInManager<ApplicationUser> _signInManager;
+        // logger : işlemeri bir log(sicil ) içinden kayderder 
         private readonly ILogger<LoginModel> _logger;
 
+
+        // Login Konstruktoru :
+        #region Constructor 
         public LoginModel(SignInManager<ApplicationUser> signInManager, 
             ILogger<LoginModel> logger,
             UserManager<ApplicationUser> userManager)
@@ -30,17 +36,25 @@ namespace RealEstateAspNetCore3._1.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
         }
+        #endregion
 
+
+        #region Yardımcı değişkenler 
         [BindProperty]
+        // inputten gelene veriyi tutar
         public InputModel Input { get; set; }
-
+        // eğer harici giriş kullancaksak : facebook , twitter ... vs 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
-
+        // oturum açıldığı sayfaının linkini tutar : yani eğer kullanıcı ilanın sayfasından giriş yaparsa
+        // / giriş yaptıktan sonra ayni ilan sayfasına yönlendirir 
         public string ReturnUrl { get; set; }
-
+        // hata mesaji 
         [TempData]
         public string ErrorMessage { get; set; }
+        #endregion
 
+
+        #region Login Model'i 
         public class InputModel
         {
             [Required]
@@ -54,7 +68,10 @@ namespace RealEstateAspNetCore3._1.Areas.Identity.Pages.Account
             [Display(Name = "Remember me?")]
             public bool RememberMe { get; set; }
         }
+        #endregion
 
+
+        // Login Get : bu fonksiyon üzerinden Login sayafsını açar sadece 
         public async Task OnGetAsync(string returnUrl = null)
         {
             if (!string.IsNullOrEmpty(ErrorMessage))
@@ -72,24 +89,25 @@ namespace RealEstateAspNetCore3._1.Areas.Identity.Pages.Account
             ReturnUrl = returnUrl;
         }
 
+        // Login Post . Login buttonua tıklarsak bu fonksyon çalışır 
+
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            // Login'in yapıldığı sayfaının linki 
             returnUrl = returnUrl ?? Url.Content("~/");
 
             if (ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+                // Login işlemi yapar Result true ise giriş yapar değil ise yapmaz 
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+                    // User giriş işlemin uyarısını gösterir
                     _logger.LogInformation("User logged in.");
+                    // giriş yapıldığı sayfaya yönlendir 
                     return LocalRedirect(returnUrl);
                 }
-                if (result.RequiresTwoFactor)
-                {
-                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
-                }
+                // burda kullanıcının profili englemişsek açamaz 
                 if (result.IsLockedOut)
                 {
                     _logger.LogWarning("User account locked out.");
@@ -97,12 +115,13 @@ namespace RealEstateAspNetCore3._1.Areas.Identity.Pages.Account
                 }
                 else
                 {
+                    //Login işlemi başarısız ise bu mesaji gösteirir
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                     return Page();
                 }
             }
 
-            // If we got this far, something failed, redisplay form
+            // Her hangi bir hata oluştu ise ayni sayfayı aç 
             return Page();
         }
     }

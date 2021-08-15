@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -11,6 +11,7 @@ namespace RealEstateAspNetCore3._1
 {
     public class Program
     {
+        //Proje ayaka kalkması burdan : Compiler projeyi burda başlatır 
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();

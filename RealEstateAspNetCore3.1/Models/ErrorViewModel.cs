@@ -1,5 +1,3 @@
-using System;
-
 namespace RealEstateAspNetCore3._1.Models
 {
     public class ErrorViewModel
