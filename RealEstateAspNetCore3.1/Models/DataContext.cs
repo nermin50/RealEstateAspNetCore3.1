@@ -9,7 +9,7 @@ namespace RealEstateAspNetCore3._1.Models
     public class DataContext : DbContext
     {
         //Database Connection 
-        public DataContext(DbContextOptions options) : base(options)
+        public DataContext(DbContextOptions <DataContext> options) : base(options)
         {
 
         }
