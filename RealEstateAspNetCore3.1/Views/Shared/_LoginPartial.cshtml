@@ -16,7 +16,7 @@
  //   Eğer girişi yapan kullanıcı Admin ise bu linkleri göster ( sadece admin için
     @if (User.IsInRole("admin"))
     {
-        <li>  <a class="btn btn-group-sm" href="#">Admin Panel </a></li>
+        <li>  <a class="btn btn-group-sm" href="/Admin/Index">Admin Panel </a></li>
 
     }
     <li> <a id="manage" class="btn btn-link" title="Welcome">Hello @UserManager.GetUserName(User)..!</a></li>

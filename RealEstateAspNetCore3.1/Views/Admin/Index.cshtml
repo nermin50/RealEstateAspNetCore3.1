@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+    <div class="row">
+        <!--Filtreleme-->
+      
+
+        <br />
+        <div class="col-md-9">
+            <div class="thumbnail" style="width:845px ; height: 400px;">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"> <a href="/Admin/Index"> Admin Panel</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Admin List</li>
+                    </ol>
+                </nav>
+
+                <div class="col-md-3">
+
+                    <div class="thumbnail">
+                        @*Logo*@ 
+                        <img src="~/logos/icons8-advertisement-page-100.png" style="border:0; height:50px" />
+                        <div class="caption">
+                            @*buttona gidecek sayafya linkini ekledik*@ 
+                            <p>@Html.ActionLink("Advertisement List", "AdvListesi", "Admin", null, new { @class = "btn btn-success btn-block" })</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="thumbnail">
+                        @*Logo*@
+                        <img src="~/logos/icons8-city-buildings-100.png" style="border:0; height:50px" />
+                        <div class="caption">
+                            @*buttona gidecek sayafya linkini ekledik*@
+                            <p>@Html.ActionLink("City List", "Index", "City", null, new { @class = "btn btn-danger btn-block" })</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="thumbnail">
+                        @*Logo*@
+                        <img src="~/logos/icons8-database-restore-64.png" style="border:0; height:50px" />
+                        <div class="caption">
+                            @*buttona gidecek sayafya linkini ekledik*@
+                            <p>@Html.ActionLink("District List", "Index", "District", null, new { @class = "btn btn-primary btn-block" })</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="thumbnail">
+                        <img src="~/logos/icons8-city-buildings-100.png" style="border:0; height:50px" />
+                        <div class="caption">
+                            <p>@Html.ActionLink("Neighborhood  List", "Index", "Neighborhood", null, new { @class = "btn btn-warning btn-block" })</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="thumbnail">
+                        <img src="~/logos/icons8-type-100.png" style="border:0; height:50px" />
+                        <div class="caption">
+                            <p>@Html.ActionLink("Status  List", "Index", "Status", null, new { @class = "btn btn-primary btn-block" })</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="thumbnail">
+                        <img src="~/logos/icons8-unknown-status-100.png" style="border:0; height:50px" />
+                        <div class="caption">
+                            <p>@Html.ActionLink("Type  List", "Index", "Type", null, new { @class = "btn btn-info btn-block" })</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="thumbnail">
+                        <img src="~/logos/icons8-link-100.png" style="border:0; height:50px" />
+                        <div class="caption">
+                            <p>@Html.ActionLink("FooterLink List", "Index", "FooterLink", null, new { @class = "btn btn-success btn-block" })</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
