@@ -1,0 +1,101 @@
+﻿@model IEnumerable<RealEstateAspNetCore3._1.Models.Neighborhood>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    table {
+        counter-reset: row-num;
+    }
+
+        table tr {
+            counter-increment: row-num;
+        }
+
+            table tr td:first-child::before {
+                content: counter(row-num) " : ";
+            }
+</style>
+
+<div class="container">
+
+    <div class="row">
+        <!--Filtreleme-->
+ 
+
+
+
+        <br />
+        <div class="col-md-9">
+            <div class="thumbnail" style="width:845px">
+
+
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"> <a href="/Admin/Index"> Admin Panel</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Neighborhood List</li>
+                    </ol>
+                </nav>
+                <a class="btn btn-primary btn-block" href="@Url.Action("Create")"> Add Neighborhood</a>
+                <table class="table table-striped">
+                    <tr>
+
+                        <th>
+                            @*@Html.DisplayNameFor(model => model.NeighborhoodName)*@
+                            Neighborhood Name
+                        </th>
+                        <th>
+                            @*@Html.DisplayNameFor(model => model.District.DistrictName)*@
+                            District Name
+                        </th>
+                        <th>
+                            @*@Html.DisplayNameFor(model => model.District.DistrictName)*@
+                            City Name
+                        </th>
+
+
+
+                        <th class="text-info">
+                            Operations
+                        </th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NeighborhoodName)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.District.DistrictName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.District.CityId)
+                            </td>
+
+
+                            <td>
+                                <a class="btn btn-primary" href="@Url.Action("Edit", new { id = item.NeighborhoodId })"><i class="fa fa-edit"></i> Edit</a>
+                                <a class="btn btn-danger" href="@Url.Action("Delete", new { id = item.NeighborhoodId })">  <i class="fa fa-trash"></i> Delete</a>
+                                <a class="btn btn-success" href="@Url.Action("Details", new { id = item.NeighborhoodId })"> <i class="fa fa-info-circle"></i> Details</a>
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
