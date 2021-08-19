@@ -47,7 +47,7 @@ namespace RealEstateAspNetCore3._1.Controllers
         // GET: District/Create
         public IActionResult Create()
         {
-            ViewData["CityId"] = new SelectList(_context.cities, "CityId", "CityId");
+            ViewData["CityId"] = new SelectList(_context.cities , "CityId", "Name");
             return View();
         }
 
@@ -64,7 +64,7 @@ namespace RealEstateAspNetCore3._1.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CityId"] = new SelectList(_context.cities, "CityId", "CityId", district.CityId);
+            ViewData["CityId"] = new SelectList(_context.cities, "CityId", "Name", district.CityId);
             return View(district);
         }
 
@@ -81,7 +81,7 @@ namespace RealEstateAspNetCore3._1.Controllers
             {
                 return NotFound();
             }
-            ViewData["CityId"] = new SelectList(_context.cities, "CityId", "CityId", district.CityId);
+            ViewData["CityId"] = new SelectList(_context.cities, "Name", "Name", district.CityId);
             return View(district);
         }
 

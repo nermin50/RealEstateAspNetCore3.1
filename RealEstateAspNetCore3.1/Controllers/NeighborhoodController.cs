@@ -21,7 +21,7 @@ namespace RealEstateAspNetCore3._1.Controllers
         // GET: Neighborhood
         public async Task<IActionResult> Index()
         {
-            var dataContext = _context.neighborhoods.Include(n => n.District);
+            var dataContext = _context.neighborhoods.Include(n => n.District).Include(m => m.District.City);
             return View(await dataContext.ToListAsync());
         }
 
@@ -47,7 +47,7 @@ namespace RealEstateAspNetCore3._1.Controllers
         // GET: Neighborhood/Create
         public IActionResult Create()
         {
-            ViewData["DistrictId"] = new SelectList(_context.districts, "DistrictId", "DistrictId");
+            ViewData["DistrictId"] = new SelectList(_context.districts, "DistrictId", "DistrictName");
             return View();
         }
 
@@ -64,7 +64,7 @@ namespace RealEstateAspNetCore3._1.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DistrictId"] = new SelectList(_context.districts, "DistrictId", "DistrictId", neighborhood.DistrictId);
+            ViewData["DistrictId"] = new SelectList(_context.districts, "DistrictId", "DistrictName", neighborhood.DistrictId);
             return View(neighborhood);
         }
 
@@ -81,7 +81,7 @@ namespace RealEstateAspNetCore3._1.Controllers
             {
                 return NotFound();
             }
-            ViewData["DistrictId"] = new SelectList(_context.districts, "DistrictId", "DistrictId", neighborhood.DistrictId);
+            ViewData["DistrictId"] = new SelectList(_context.districts, "DistrictId", "DistrictName", neighborhood.DistrictId);
             return View(neighborhood);
         }
 
