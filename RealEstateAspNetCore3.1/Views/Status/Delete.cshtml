@@ -1,0 +1,46 @@
+﻿@model RealEstateAspNetCore3._1.Models.Status
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+
+    <div class="row">
+        <!--Filtreleme-->
+
+
+
+
+        <br />
+        <div class="col-md-9">
+            <div class="thumbnail" style="width:845px">
+
+
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"> <a href="/Admin/Index"> Admin Panel</a></li>,,
+                        <li class="breadcrumb-item"> <a href="/Status/Index"> Status List</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Status Delete</li>
+                    </ol>
+                </nav>
+
+                <hr />
+                <dl class="row">
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.StatusName)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.StatusName)
+                    </dd>
+                </dl>
+
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="StatusId" />
+                    <input type="submit" value="Delete" class="btn btn-danger" /> |
+                    <a asp-action="Index">Back to List</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

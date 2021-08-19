@@ -1,0 +1,55 @@
+﻿@model RealEstateAspNetCore3._1.Models.Status
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+    <div class="row">
+        <!--Filtreleme-->
+
+
+
+
+        <br />
+        <div class="col-md-9">
+            <div class="thumbnail" style="width:845px">
+
+
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"> <a href="/Admin/Index"> Admin Panel</a></li>
+                        <li class="breadcrumb-item"> <a href="/Status/Index"> Status List</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Edit</li>
+                    </ol>
+                </nav>
+                <hr />
+                <div class="row">
+                    <div class="col-md-4">
+                        <form asp-action="Edit">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="StatusId" />
+                            <div class="form-group">
+                                <label asp-for="StatusName" class="control-label"></label>
+                                <input asp-for="StatusName" class="form-control" />
+                                <span asp-validation-for="StatusName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Save" class="btn btn-primary" />
+                                <a asp-action="Index">Back to List</a>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
