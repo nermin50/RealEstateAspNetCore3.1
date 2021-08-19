@@ -1,4 +1,4 @@
-﻿@model RealEstateAspNetCore3._1.Models.District
+﻿@model RealEstateAspNetCore3._1.Models.City
 
 @{
     ViewData["Title"] = "Create";
@@ -21,8 +21,8 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"> <a href="/Admin/Index"> Admin Panel</a></li>
-                        <li class="breadcrumb-item"> <a href="/Neighborhood/index"> District List</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Add District </li>
+                        <li class="breadcrumb-item"> <a href="/Neighborhood/index"> şehir  Listesi</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Add City </li>
                     </ol>
                 </nav>
                 <div class="row">
@@ -30,13 +30,9 @@
                         <form asp-action="Create">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div class="form-group">
-                                <label asp-for="DistrictName" class="control-label"></label>
-                                <input asp-for="DistrictName" class="form-control" />
-                                <span asp-validation-for="DistrictName" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="CityId" class="control-label"></label>
-                                <select asp-for="CityId" class="form-control" asp-items="ViewBag.CityId"></select>
+                                <label asp-for="Name" class="control-label"></label>
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <input type="submit" value="Create" class="btn btn-primary" />

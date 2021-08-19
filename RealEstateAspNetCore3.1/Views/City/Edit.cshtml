@@ -1,10 +1,9 @@
-﻿@model RealEstateAspNetCore3._1.Models.District
+﻿@model RealEstateAspNetCore3._1.Models.City
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <div class="container">
 
     <div class="row">
@@ -21,31 +20,31 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"> <a href="/Admin/Index"> Admin Panel</a></li>
-                        <li class="breadcrumb-item"> <a href="/Neighborhood/index"> District List</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Add District </li>
+                        <li class="breadcrumb-item"> <a href="/Neighborhood/Index"> City List</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Edit</li>
                     </ol>
                 </nav>
+                <hr />
                 <div class="row">
                     <div class="col-md-4">
-                        <form asp-action="Create">
+                        <form asp-action="Edit">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="CityId" />
                             <div class="form-group">
-                                <label asp-for="DistrictName" class="control-label"></label>
-                                <input asp-for="DistrictName" class="form-control" />
-                                <span asp-validation-for="DistrictName" class="text-danger"></span>
+                                <label asp-for="Name" class="control-label"></label>
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="CityId" class="control-label"></label>
-                                <select asp-for="CityId" class="form-control" asp-items="ViewBag.CityId"></select>
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" value="Create" class="btn btn-primary" />
+                                <input type="submit" value="Save" class="btn btn-primary" />
                                 <a asp-action="Index">Back to List</a>
 
                             </div>
                         </form>
                     </div>
                 </div>
+
+
             </div>
 
         </div>
