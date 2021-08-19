@@ -1,0 +1,53 @@
+﻿@model RealEstateAspNetCore3._1.Models.District
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+    <div class="row">
+        <!--Filtreleme-->
+
+
+
+
+        <br />
+        <div class="col-md-9">
+            <div class="thumbnail" style="width:845px">
+
+
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"> <a href="/Admin/Index"> Admin Panel</a></li>,,
+                        <li class="breadcrumb-item"> <a href="/Neighborhood/Index"> Neighborhood List</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Neighborhood Details</li>
+                    </ol>
+                </nav>
+
+                <hr />
+                <dl class="row">
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.DistrictName)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.DistrictName)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.City)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.City.CityId)
+                    </dd>
+                </dl>
+            </div>
+            <div>
+                <a style="margin-left:50px; margin-bottom:10px;" class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.DistrictId">Edit</a> |
+                <a style="margin-bottom: 10px;" class="btn btn-danger" asp-action="Index">Back to List</a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
