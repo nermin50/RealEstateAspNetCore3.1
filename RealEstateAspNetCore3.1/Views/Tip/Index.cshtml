@@ -1,0 +1,91 @@
+﻿@model IEnumerable<RealEstateAspNetCore3._1.Models.Tip>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    table {
+        counter-reset: row-num;
+    }
+
+        table tr {
+            counter-increment: row-num;
+        }
+
+            table tr td:first-child::before {
+                content: counter(row-num) " : ";
+            }
+</style>
+
+<div class="container">
+
+    <div class="row">
+        <!--Filtreleme-->
+
+
+
+
+        <br />
+        <div class="col-md-9">
+            <div class="thumbnail" style="width:845px">
+
+
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"> <a href="/Admin/Index"> Admin Panel</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Type List</li>
+                    </ol>
+                </nav>
+                <a class="btn btn-primary btn-block" asp-action="Create"> Add StaType</a>
+                <table class="table table-striped" id="myTable">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TypeName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Status)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TypeName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Status.StatusName)
+                                </td>
+                                <td>
+                                    <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.TypeId">Edit</a> |
+                                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.TypeId">Details</a> |
+                                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.TypeId">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TypeName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Status)
+                            </th>
+                            <th></th>
+                        </tr>
+
+                    </tfoot>
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
