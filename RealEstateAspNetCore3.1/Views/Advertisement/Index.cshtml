@@ -5,136 +5,116 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<style>
-    table {
-        counter-reset: row-num;
-    }
+<h1>Index</h1>
 
-        table tr {
-            counter-increment: row-num;
-        }
-
-            table tr td:first-child::before {
-                content: counter(row-num) " : ";
-            }
-</style>
-
-<div class="container">
-
-    <div class="row">
-        <!--Filtreleme-->
-
-
-
-
-        <br />
-        <div class="col-md-9">
-            <div class="thumbnail" style="width:845px">
-
-
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"> <a href="/Admin/Index"> Admin Panel</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Status List</li>
-                    </ol>
-                </nav>
-                <a class="btn btn-primary btn-block" asp-action="Create"> Add Status</a>
-                <table class="table table-striped" id="myTable">
-                    <thead>
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Description)
-                            </th>
-                  
-                            <th>
-                                @Html.DisplayNameFor(model => model.Telephone)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Addres)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.CityId)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.DistrictId)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Neighborhood)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.TypeId)
-                            </th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Description)
-                                </td>
-                              
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Telephone)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Addres)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.CityId)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.DistrictId)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Neighborhood.NeighborhoodId)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.TypeId)
-                                </td>
-                                <td>
-                                    <a asp-action="Edit" asp-route-id="@item.AdvId">Edit</a> |
-                                    <a asp-action="Details" asp-route-id="@item.AdvId">Details</a> |
-                                    <a asp-action="Delete" asp-route-id="@item.AdvId">Delete</a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Description)
-                            </th>
-
-                            <th>
-                                @Html.DisplayNameFor(model => model.Telephone)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Addres)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.CityId)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.DistrictId)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Neighborhood)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.TypeId)
-                            </th>
-                            <th></th>
-                        </tr>
-
-                    </tfoot>
-                </table>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumOfRoom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumOfBath)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Credit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Area)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Floor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Feature)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telephone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Addres)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CityId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DistrictId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatusId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Neighborhood)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TypeId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumOfRoom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumOfBath)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Credit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Area)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Floor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Feature)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telephone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Addres)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CityId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DistrictId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Neighborhood.NeighborhoodId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.AdvId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.AdvId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.AdvId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

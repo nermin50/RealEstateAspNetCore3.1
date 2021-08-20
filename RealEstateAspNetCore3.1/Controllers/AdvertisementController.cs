@@ -18,11 +18,48 @@ namespace RealEstateAspNetCore3._1.Controllers
             _context = context;
         }
 
-       
+        public List<City> CityGet()
+        {
+            List<City> cities = _context.cities.ToList();
+            return cities;
+        }
+        public ActionResult DistrictGet(int CityId)
+        {
+            List<District> districtlist = _context.districts.Where(x => x.CityId == CityId).ToList();
+            ViewBag.districtListesi = new SelectList(districtlist, "DistrictId", "DistrictName");
+
+            return PartialView("DistrictPartial");
+        }
+
+        public ActionResult NgbhdGet(int districtid)
+        {
+            List<Neighborhood> neighborhoodlist = _context.neighborhoods.Where(x => x.DistrictId == districtid).ToList();
+            ViewBag.nghbdlistesi = new SelectList(neighborhoodlist, "NeighborhoodId", "NeighborhoodName");
+
+            return PartialView("NgbhdPartial");
+        }
+
+        public List<Status> statusGet()
+        {
+            List<Status> statuses = _context.Status.ToList();
+            return statuses;
+        }
+        public ActionResult typeGet(int statusid)
+        {
+            // because status sub table of Type 
+            List<Tip> typelist = _context.Tips.Where(x => x.StatusId == statusid).ToList();
+            ViewBag.typelistesi = new SelectList(typelist, "TypeId", "TypeName");
+
+
+            return PartialView("TypePartial");
+        }
+
+
+
         // GET: Advertisement
         public async Task<IActionResult> Index()
         {
-            var dataContext = _context.advertisements.Include(a => a.Neighborhood).Include(b => b.Tip);
+            var dataContext = _context.advertisements.Include(a => a.Neighborhood);
             return View(await dataContext.ToListAsync());
         }
 
@@ -57,7 +94,7 @@ namespace RealEstateAspNetCore3._1.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AdvId,Description,Price,NumOfRoom,NumOfBath,Credit,Area,Floor,Feature,Telephone,Addres,CityId,DistrictId,NeighborhoodId,TypeId")] Advertisement advertisement)
+        public async Task<IActionResult> Create([Bind("AdvId,Description,Price,NumOfRoom,NumOfBath,Credit,Area,Floor,Feature,Telephone,Addres,CityId,DistrictId,StatusId,NeighborhoodId,TypeId")] Advertisement advertisement)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +128,7 @@ namespace RealEstateAspNetCore3._1.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AdvId,Description,Price,NumOfRoom,NumOfBath,Credit,Area,Floor,Feature,Telephone,Addres,CityId,DistrictId,NeighborhoodId,TypeId")] Advertisement advertisement)
+        public async Task<IActionResult> Edit(int id, [Bind("AdvId,Description,Price,NumOfRoom,NumOfBath,Credit,Area,Floor,Feature,Telephone,Addres,CityId,DistrictId,StatusId,NeighborhoodId,TypeId")] Advertisement advertisement)
         {
             if (id != advertisement.AdvId)
             {

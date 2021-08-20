@@ -22,6 +22,8 @@ namespace RealEstateAspNetCore3._1.Models
         /*Şehir adı ve semt ve mahalla adıları ilan tablosunda görmek için Id'lerini burya yazdık */
         public int CityId { get; set; }
         public int DistrictId { get; set; }
+        public int StatusId { get; set; }
+
 
         /*Şehir  ve semt adına ulaşmak için Mahalla(NeighborhoodId) id'isi üzerinden ulaşablirilz*/
         public int NeighborhoodId { get; set; }
