@@ -1,0 +1,160 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using RealEstateAspNetCore3._1.Models;
+
+namespace RealEstateAspNetCore3._1.Controllers
+{
+    public class AdvertisementController : Controller
+    {
+        private readonly DataContext _context;
+
+        public AdvertisementController(DataContext context)
+        {
+            _context = context;
+        }
+
+       
+        // GET: Advertisement
+        public async Task<IActionResult> Index()
+        {
+            var dataContext = _context.advertisements.Include(a => a.Neighborhood).Include(b => b.Tip);
+            return View(await dataContext.ToListAsync());
+        }
+
+        // GET: Advertisement/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var advertisement = await _context.advertisements
+                .Include(a => a.Neighborhood)
+                .FirstOrDefaultAsync(m => m.AdvId == id);
+            if (advertisement == null)
+            {
+                return NotFound();
+            }
+
+            return View(advertisement);
+        }
+
+        // GET: Advertisement/Create
+        public IActionResult Create()
+        {
+            ViewData["NeighborhoodId"] = new SelectList(_context.neighborhoods, "NeighborhoodId", "NeighborhoodId");
+            return View();
+        }
+
+        // POST: Advertisement/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("AdvId,Description,Price,NumOfRoom,NumOfBath,Credit,Area,Floor,Feature,Telephone,Addres,CityId,DistrictId,NeighborhoodId,TypeId")] Advertisement advertisement)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(advertisement);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["NeighborhoodId"] = new SelectList(_context.neighborhoods, "NeighborhoodId", "NeighborhoodId", advertisement.NeighborhoodId);
+            return View(advertisement);
+        }
+
+        // GET: Advertisement/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var advertisement = await _context.advertisements.FindAsync(id);
+            if (advertisement == null)
+            {
+                return NotFound();
+            }
+            ViewData["NeighborhoodId"] = new SelectList(_context.neighborhoods, "NeighborhoodId", "NeighborhoodId", advertisement.NeighborhoodId);
+            return View(advertisement);
+        }
+
+        // POST: Advertisement/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("AdvId,Description,Price,NumOfRoom,NumOfBath,Credit,Area,Floor,Feature,Telephone,Addres,CityId,DistrictId,NeighborhoodId,TypeId")] Advertisement advertisement)
+        {
+            if (id != advertisement.AdvId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(advertisement);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!AdvertisementExists(advertisement.AdvId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["NeighborhoodId"] = new SelectList(_context.neighborhoods, "NeighborhoodId", "NeighborhoodId", advertisement.NeighborhoodId);
+            return View(advertisement);
+        }
+
+        // GET: Advertisement/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var advertisement = await _context.advertisements
+                .Include(a => a.Neighborhood)
+                .FirstOrDefaultAsync(m => m.AdvId == id);
+            if (advertisement == null)
+            {
+                return NotFound();
+            }
+
+            return View(advertisement);
+        }
+
+        // POST: Advertisement/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var advertisement = await _context.advertisements.FindAsync(id);
+            _context.advertisements.Remove(advertisement);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool AdvertisementExists(int id)
+        {
+            return _context.advertisements.Any(e => e.AdvId == id);
+        }
+    }
+}
