@@ -59,7 +59,7 @@ namespace RealEstateAspNetCore3._1.Controllers
         // GET: Advertisement
         public async Task<IActionResult> Index()
         {
-            var dataContext = _context.advertisements.Include(a => a.Neighborhood);
+            var dataContext = _context.advertisements.Include(a => a.Neighborhood).Include(n=> n.Tip);
             return View(await dataContext.ToListAsync());
         }
 
@@ -85,8 +85,10 @@ namespace RealEstateAspNetCore3._1.Controllers
         // GET: Advertisement/Create
         public IActionResult Create()
         {
-            ViewData["NeighborhoodId"] = new SelectList(_context.neighborhoods, "NeighborhoodId", "NeighborhoodId");
-            return View();
+            //for list city and district to create page
+            ViewBag.citylist = new SelectList(CityGet(), "CityId", "Name");
+
+            ViewBag.statuslist = new SelectList(statusGet(), "StatusId", "StatusName"); return View();
         }
 
         // POST: Advertisement/Create

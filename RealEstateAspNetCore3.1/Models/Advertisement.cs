@@ -27,14 +27,14 @@ namespace RealEstateAspNetCore3._1.Models
 
         /*Şehir  ve semt adına ulaşmak için Mahalla(NeighborhoodId) id'isi üzerinden ulaşablirilz*/
         public int NeighborhoodId { get; set; }
-        public Neighborhood Neighborhood { get; set; }
+        public virtual Neighborhood Neighborhood { get; set; }
 
         /********************************************************************************/
 
         /*Her ilanın Tipini ve durumunu listelemek için */
 
         public int TypeId { get; set; }
-        public Tip Tip { get; set; }
+        public virtual Tip Tip { get; set; }
 
         /*ilanın resimlerini çağrmak için */
         public List<AdvPhoto> AdvPhotos { get; set; }

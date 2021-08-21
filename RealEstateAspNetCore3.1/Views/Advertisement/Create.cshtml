@@ -5,96 +5,224 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
 
-<h4>Advertisement</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        <!--Price-->
+        <div class="form-group">
+            @Html.LabelFor(model => model.Price, "Price :", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+
+        <!--NumberOfRoome-->
+        <div class="form-group">
+            @Html.LabelFor(model => model.NumOfRoom, "NumberOfRoom :", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.NumOfRoom, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NumOfRoom, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group">
-                <label asp-for="NumOfRoom" class="control-label"></label>
-                <input asp-for="NumOfRoom" class="form-control" />
-                <span asp-validation-for="NumOfRoom" class="text-danger"></span>
+        </div>
+
+        <!--NumberOfBath-->
+        <div class="form-group">
+            @Html.LabelFor(model => model.NumOfBath, "NumberOfBath :", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.NumOfBath, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NumOfBath, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group">
-                <label asp-for="NumOfBath" class="control-label"></label>
-                <input asp-for="NumOfBath" class="form-control" />
-                <span asp-validation-for="NumOfBath" class="text-danger"></span>
+        </div>
+
+        <!--Credit-->
+        <div class="form-group">
+            @Html.LabelFor(model => model.Credit, "Creadit :", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div style="padding-left:60px" class="col-md-4">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Credit)
+                    @Html.ValidationMessageFor(model => model.Credit, "", new { @class = "text-danger" })
+                </div>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Credit" /> @Html.DisplayNameFor(model => model.Credit)
-                </label>
+        </div>
+
+        <!--Area-->
+        <div class="form-group">
+            @Html.LabelFor(model => model.Area, "Area :", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Area, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Area, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group">
-                <label asp-for="Area" class="control-label"></label>
-                <input asp-for="Area" class="form-control" />
-                <span asp-validation-for="Area" class="text-danger"></span>
+        </div>
+
+        <!--Floor-->
+        <div class="form-group">
+            @Html.LabelFor(model => model.Floor, "Floor :", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Floor, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Floor, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group">
-                <label asp-for="Floor" class="control-label"></label>
-                <input asp-for="Floor" class="form-control" />
-                <span asp-validation-for="Floor" class="text-danger"></span>
+        </div>
+
+        <!--Feature-->
+        <div class="form-group">
+            @Html.LabelFor(model => model.Feature, "Feature", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Feature, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Feature, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group">
-                <label asp-for="Feature" class="control-label"></label>
-                <input asp-for="Feature" class="form-control" />
-                <span asp-validation-for="Feature" class="text-danger"></span>
+        </div>
+
+        <!--Telephone-->
+        <div class="form-group">
+            @Html.LabelFor(model => model.Telephone, "Telephone :", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Telephone, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Telephone, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group">
-                <label asp-for="Telephone" class="control-label"></label>
-                <input asp-for="Telephone" class="form-control" />
-                <span asp-validation-for="Telephone" class="text-danger"></span>
+        </div>
+
+        <!--Addres-->
+        <div class="form-group">
+            @Html.LabelFor(model => model.Addres, "Address", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Addres, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Addres, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group">
-                <label asp-for="Addres" class="control-label"></label>
-                <input asp-for="Addres" class="form-control" />
-                <span asp-validation-for="Addres" class="text-danger"></span>
+        </div>
+
+        <!--City Name-->
+        <div class="form-group">
+            @Html.LabelFor(model => model.CityId, "City Name :", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @if (ViewBag.citylist != null)
+                {
+                    @Html.DropDownListFor(m => m.CityId, ViewBag.citylist as SelectList, "Select city", new { @class = "form-control" })
+
+                }
             </div>
-            <div class="form-group">
-                <label asp-for="CityId" class="control-label"></label>
-                <input asp-for="CityId" class="form-control" />
-                <span asp-validation-for="CityId" class="text-danger"></span>
+        </div>
+
+        <!--District name-->
+        <div class="form-group">
+            @Html.LabelFor(model => model.DistrictId, "District Name :", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownListFor(m => m.DistrictId, new SelectList(""), "First Choice City Name", new { @class = "form-control" })
             </div>
-            <div class="form-group">
-                <label asp-for="DistrictId" class="control-label"></label>
-                <input asp-for="DistrictId" class="form-control" />
-                <span asp-validation-for="DistrictId" class="text-danger"></span>
+        </div>
+
+        <!--Negbd name-->
+        <div class="form-group">
+            @Html.LabelFor(model => model.NeighborhoodId, "Negbd Name :", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownListFor(m => m.NeighborhoodId, new SelectList(""), "First Choice district Name", new { @class = "form-control" })
+
             </div>
-            <div class="form-group">
-                <label asp-for="StatusId" class="control-label"></label>
-                <input asp-for="StatusId" class="form-control" />
-                <span asp-validation-for="StatusId" class="text-danger"></span>
+        </div>
+
+        <!--Status name-->
+        <div class="form-group">
+            @Html.LabelFor(model => model.StatusId, "Status Name :", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @if (ViewBag.statuslist != null)
+                {
+                    @Html.DropDownListFor(m => m.StatusId, ViewBag.statuslist as SelectList, ("Select Status Plz "), new { @class = "form-control" })
+                }
             </div>
-            <div class="form-group">
-                <label asp-for="NeighborhoodId" class="control-label"></label>
-                <select asp-for="NeighborhoodId" class ="form-control" asp-items="ViewBag.NeighborhoodId"></select>
+        </div>
+
+        <!--Type name-->
+        <div class="form-group">
+            @Html.LabelFor(model => model.TypeId, "Type Name :", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownListFor(m => m.TypeId, new SelectList(""), "First Choice Status Name", new { @class = "form-control" })
+
             </div>
-            <div class="form-group">
-                <label asp-for="TypeId" class="control-label"></label>
-                <input asp-for="TypeId" class="form-control" />
-                <span asp-validation-for="TypeId" class="text-danger"></span>
+        </div>
+
+        <!--Description-->
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, "Description :", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group">
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-primary" />
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-warning" })
+
             </div>
-        </form>
+        </div>
     </div>
-</div>
+}
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<script src="~/lib/jquery/jquery-3.4.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#CityId").change(function () {
+            var sehirid = $(this).val();
+            debugger
+            $.ajax({
+                type: "Post",
+                url: "/Advertisement/DistrictGet?CityId=" + sehirid,
+                contentType: "html",
+                success: function (response) {
+                    debugger
+                    $("#DistrictId").empty();
+                    $("#DistrictId").append(response);
+                }
+            })
+        })
+    })
+</script>
 
+<script>
+    $(document).ready(function () {
+        $("#DistrictId").change(function () {
+            var districtid = $(this).val();
+            debugger
+            $.ajax({
+                type: "Post",
+                url: "/Advertisement/NgbhdGet?DistrictId=" + districtid,
+                contentType: "html",
+                success: function (response) {
+                    debugger
+                    $("#NeighborhoodId").empty();
+                    $("#NeighborhoodId").append(response);
+                }
+            })
+        })
+    })
+</script>
+
+
+<!--Status is sub  of Type -->
+<script>
+    $(document).ready(function () {
+        $("#StatusId").change(function () {
+            var statusid = $(this).val();
+            debugger
+            $.ajax({
+                type: "Post",
+                url: "/Advertisement/typeGet?statusid=" + statusid,
+                contentType: "html",
+                success: function (response) {
+                    debugger
+                    $("#TypeId").empty();
+                    $("#TypeId").append(response);
+                }
+            })
+        })
+    })
+</script>
