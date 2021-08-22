@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "Images";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<head>
+    <link href="~/site.css" rel="stylesheet" />
+</head>*@
+
+<div class="container">
+    @{
+        Html.BeginForm("Images", "Advertisement", FormMethod.Post, new { enctype = "multipart/Form-data" });
+
+        foreach (var item in ViewBag.adv)
+        {
+           
+            <h3>The Number of Adv ((@item.AdvId ))  For this Adv ADD PHOTO  </h3>
+            <table>
+                <tr>
+                    <td> Add Photo</td>
+                    <td><input type="hidden" name="id" value="@item.AdvId" /></td>
+                    <td>
+                        <input type="file" name="file" multiple />
+                    </td>
+                    <td>
+                        <input type="submit" value="ADD PLZ" class="btn btn-primary" />
+                        <br />
+                        <span style="color:green">@Html.Raw(ViewBag.Message)</span>
+                    </td>
+                    <td>
+                        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-warning" })
+                    </td>
+                </tr>
+            </table>
+        }
+    }
+    <br />
+
+
+    <div class="row">
+        <hr />
+        <p style="text-align :center; font-size:medium;"> The images of Adv</p>
+        <hr />
+    </div>
+    <div class="row">
+        @foreach (var item in ViewBag.rsml)
+        {
+            <div class="col-md-4">
+                <div class="img-thumbnail">
+                    <img src="~/Uploads/@item.AdvPhotoName" height="250" width="250" />
+
+                    <a class="btn btn-danger" href="@Url.Action("Deleteimages", new { id = item.AdvPhotoId , advId=item.AdvId})">  <i class="fa fa-trash"></i> Delete</a>
+
+                </div>
+
+            </div>
+
+        }
+    </div>
+</div>
+
+

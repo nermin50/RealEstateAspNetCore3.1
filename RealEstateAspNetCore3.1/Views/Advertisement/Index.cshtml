@@ -19,27 +19,11 @@
             <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumOfRoom)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumOfBath)
-            </th>
+           
             <th>
                 @Html.DisplayNameFor(model => model.Credit)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Area)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Floor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Feature)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Telephone)
-            </th>
+          
             <th>
                 @Html.DisplayNameFor(model => model.Addres)
             </th>
@@ -70,24 +54,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumOfRoom)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumOfBath)
-            </td>
+       
             <td>
                 @Html.DisplayFor(modelItem => item.Credit)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Area)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Floor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Feature)
-            </td>
+         
             <td>
                 @Html.DisplayFor(modelItem => item.Telephone)
             </td>
@@ -112,9 +83,46 @@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.AdvId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.AdvId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.AdvId">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.AdvId">Delete</a> |
+                <a asp-action="Images" asp-route-id="@item.AdvId">add photos </a>
             </td>
         </tr>
 }
     </tbody>
+
+    <tfoot>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Credit)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Addres)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CityId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DistrictId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatusId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Neighborhood)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TypeId)
+            </th>
+            <th></th>
+        </tr>
+
+    </tfoot>
 </table>

@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -12,10 +16,84 @@ namespace RealEstateAspNetCore3._1.Controllers
     public class AdvertisementController : Controller
     {
         private readonly DataContext _context;
+        private IHostingEnvironment Environment;
 
-        public AdvertisementController(DataContext context)
+        public AdvertisementController(DataContext context , IHostingEnvironment _environment)
         {
+            Environment = _environment;
+
             _context = context;
+        }
+
+        public ActionResult Images(int id)
+        {
+            var adv = _context.advertisements.Where(i => i.AdvId == id).ToList();
+            var rsml = _context.advPhotos.Where(i => i.AdvId == id).ToList();
+
+            ViewBag.rsml = rsml;
+            ViewBag.adv = adv;
+
+            return View();
+
+
+        }
+        [HttpPost]
+        public ActionResult Images(int id, List<IFormFile> file)
+        {
+            if (file != null)
+            {
+                string wwwPath = this.Environment.WebRootPath;
+                string contentPath = this.Environment.ContentRootPath;
+              
+                string path = Path.Combine(this.Environment.WebRootPath, "Uploads");
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                List<string> uploadedFiles = new List<string>();
+                foreach (IFormFile postedFile in file)
+                {
+                    string fileName = Path.GetFileName(postedFile.FileName);
+                    AdvPhoto rsm = new AdvPhoto();
+                    rsm.AdvPhotoName = fileName.ToString();
+                    // ilişkilendirme 
+                    rsm.AdvId = id;
+                    _context.advPhotos.Add(rsm);
+                    _context.SaveChanges();
+                    using (FileStream stream = new FileStream(Path.Combine(path, fileName), FileMode.Create))
+                    {
+                        postedFile.CopyTo(stream);
+                        uploadedFiles.Add(fileName);
+                       
+                        ViewBag.Message += string.Format("<b>{0}</b> uploaded.<br />", fileName);
+                    }
+                }
+
+                // Resim bu Modelin
+
+                return RedirectToAction("Images");
+            }
+
+            ViewBag.alert = "Please insert Photo.....";
+            return RedirectToAction("Index");
+
+        }
+        public ActionResult Deleteimages(int? id , int? advId)
+        {
+            if (id == null)
+            {
+                return BadRequest("request is incorrect");
+            }
+            AdvPhoto advphoto = _context.advPhotos.Find(id);
+            if (advphoto == null)
+            {
+                return NotFound();
+            }
+
+
+            _context.advPhotos.Remove(advphoto);
+            _context.SaveChanges();
+            return RedirectToAction("Images" , new { id = advId });
         }
 
         public List<City> CityGet()
