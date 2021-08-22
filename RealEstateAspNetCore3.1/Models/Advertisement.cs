@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RealEstateAspNetCore3._1.Models
 {
@@ -34,6 +35,7 @@ namespace RealEstateAspNetCore3._1.Models
         /*Her ilanın Tipini ve durumunu listelemek için */
 
         public int TypeId { get; set; }
+        [ForeignKey("TypeId")]
         public virtual Tip Tip { get; set; }
 
         /*ilanın resimlerini çağrmak için */

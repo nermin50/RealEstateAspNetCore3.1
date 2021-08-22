@@ -59,26 +59,24 @@
                 @Html.DisplayFor(modelItem => item.Credit)
             </td>
          
-            <td>
-                @Html.DisplayFor(modelItem => item.Telephone)
-            </td>
+           
             <td>
                 @Html.DisplayFor(modelItem => item.Addres)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CityId)
+                @Html.DisplayFor(modelItem => item.Neighborhood.District.City.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DistrictId)
+                @Html.DisplayFor(modelItem => item.Neighborhood.District.DistrictName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StatusId)
+                @Html.DisplayFor(modelItem => item.Tip.Status.StatusName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Neighborhood.NeighborhoodId)
+                @Html.DisplayFor(modelItem => item.Neighborhood.NeighborhoodName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TypeId)
+                @Html.DisplayFor(modelItem => item.Tip.TypeName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.AdvId">Edit</a> |

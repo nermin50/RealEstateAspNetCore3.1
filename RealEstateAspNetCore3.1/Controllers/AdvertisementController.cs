@@ -137,7 +137,8 @@ namespace RealEstateAspNetCore3._1.Controllers
         // GET: Advertisement
         public async Task<IActionResult> Index()
         {
-            var dataContext = _context.advertisements.Include(a => a.Neighborhood).Include(n=> n.Tip);
+            var dataContext = _context.advertisements.Include(a => a.Neighborhood).Include(b => b.Neighborhood.District)
+                .Include(c => c.Neighborhood.District.City).Include(n=> n.Tip).Include(m => m.Tip.Status);
             return View(await dataContext.ToListAsync());
         }
 
