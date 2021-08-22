@@ -8,6 +8,6 @@
 
         /*Many To One Many photo to one ilan*/
         public int AdvId { get; set; }
-        public Advertisement Advertisement { get; set; }
+        public virtual  Advertisement Advertisement { get; set; }
     }
 }

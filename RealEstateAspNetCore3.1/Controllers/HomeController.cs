@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using RealEstateAspNetCore3._1.Models;
 using System;
@@ -12,15 +13,23 @@ namespace RealEstateAspNetCore3._1.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly DataContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+
+        public HomeController(ILogger<HomeController> logger, DataContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var imgs = _context.advPhotos.ToList();
+            ViewBag.imgs = imgs;
+
+            var adv = _context.advertisements.Include(m => m.Neighborhood).Include(e => e.Tip).OrderByDescending(i => i.AdvId); ;
+            //ModelState.Clear();
+            return View(adv.ToList());
         }
 
         public IActionResult Privacy()
