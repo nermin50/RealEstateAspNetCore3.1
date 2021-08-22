@@ -42,5 +42,13 @@ namespace RealEstateAspNetCore3._1.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public PartialViewResult Slider()
+        {
+            var adv = _context.advertisements.ToList().Take(5);
+            var imgs = _context.advPhotos.ToList();
+            ViewBag.imgs = imgs;
+            return PartialView(adv);
+        }
     }
 }
