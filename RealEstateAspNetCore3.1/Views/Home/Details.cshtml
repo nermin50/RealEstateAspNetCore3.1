@@ -1,0 +1,91 @@
+﻿@model RealEstateAspNetCore3._1.Models.Advertisement
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container">
+    <div class="row">
+        <!--slider-->
+        <div class="col-md-8">
+
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner" role="listbox">
+                    <!-- Wrapper for slides -->
+                    @{ int i = 0;}
+                    @foreach (var item in ViewBag.imgs)
+                    {
+                        i++;
+                        var active = 1 == i++ ? "active" : "";
+                        <div class="item @active">
+                            <img src="~/Uploads/@item.AdvPhotoName" alt="..." style="width:1150px;height:450px;">
+
+                        </div>
+                    }
+
+
+
+
+                </div>
+
+                <!-- Controls -->
+                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <table class="table table-bordered">
+                <tbody>
+                    <tr><th colspan="2"> ilan özelikleri </th></tr>
+                    <tr><td><strong>Açıklama</strong></td><td>@Model.Description</td></tr>
+                    <tr><td><strong>Kodu</strong></td><td>kodu</td></tr>
+                    <tr><td><strong>fiyat</strong></td><td>@Model.Price</td></tr>
+                    <tr><td><strong>Durum</strong></td><td>@Model.Tip.Status.StatusName</td></tr>
+                    <tr><td><strong>Tip</strong></td><td>@Model.Tip.TypeName</td></tr>
+                    <tr><td><strong>Alan m<sup>2</sup></strong></td><td>@Model.Area</td></tr>
+                    <tr><td><strong>Oda sayisi</strong></td><td>@Model.NumOfRoom</td></tr>
+                    <tr><td><strong>Kat</strong></td><td>@Model.Floor</td></tr>
+                    <tr><td><strong>Adres</strong></td><td>@Model.Addres</td></tr>
+                    <tr><td><strong>Şehir</strong></td><td>@Model.Neighborhood.District.City.Name <a class="btn btn-success"> <i class="fa fa-info-circle"></i> Details</a></td>  </tr>
+                    <tr><td><strong>Mahalla</strong></td><td>@Model.Neighborhood.NeighborhoodName</td></tr>
+                    <tr><td><strong>Semt</strong></td><td>@Model.Neighborhood.District.DistrictName</td></tr>
+                    <tr><td><strong>Özelikler</strong></td><td>@Model.Feature</td></tr>
+                    <tr>
+                        <td><strong>Özelikler</strong></td>
+                        <td>
+                            @if (Model.Credit == true)
+                            {
+                                <label class="labale label-success">Yes</label>
+                            }
+                            else
+                            {
+                                <label class="labale label-danger">No</label>
+                            }
+
+                        </td>
+                    </tr>
+
+                    <tr><td><strong>Telephone</strong></td><td><button class="btn btn-success btn-block"><i class="fa fa-phone" aria-hidden="true"></i> @Model.Telephone</button></td></tr>
+
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+

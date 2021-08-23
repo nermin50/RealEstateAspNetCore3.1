@@ -51,5 +51,15 @@ namespace RealEstateAspNetCore3._1.Controllers
             ViewBag.imgs = imgs;
             return PartialView(adv);
         }
+        //ilanın detayları 
+        public ActionResult Details(int id)
+        {
+            var adv = _context.advertisements.Where(i => i.AdvId == id).Include(l => l.Neighborhood).Include(n => n.Neighborhood.District).
+                Include(m => m.Neighborhood.District.City).Include(e => e.Tip).Include(e => e.Tip.Status).FirstOrDefault();
+            var imgs = _context.advPhotos.Where(i => i.AdvId == id).ToList();
+            ViewBag.imgs = imgs;
+            return View(adv);
+
+        }
     }
 }
