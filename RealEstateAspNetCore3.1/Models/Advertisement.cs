@@ -8,6 +8,7 @@ namespace RealEstateAspNetCore3._1.Models
     {
         [Key]
         public int AdvId { get; set; }
+        public string UserName { get; set; }
 
         public string Description { get; set; }
         public double Price { get; set; }

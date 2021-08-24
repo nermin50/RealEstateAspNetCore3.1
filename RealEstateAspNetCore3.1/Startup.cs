@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -38,7 +39,8 @@ namespace RealEstateAspNetCore3._1
             // RunCompilatiion : yani kod'da eğer bir değişiklik yaparsak (HTML'de) kodların değişiklerini kaydedip sadece sayfayı yenilenmye ihtiyacımız var
             // yeniden çalıştırmasına gerek yok 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
-
+            services.AddHttpContextAccessor();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddRazorPages();
         }
 
