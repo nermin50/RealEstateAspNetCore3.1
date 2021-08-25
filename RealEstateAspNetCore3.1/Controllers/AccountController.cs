@@ -3,10 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using RealEstateAspNetCore3._1.Identity;
 using RealEstateAspNetCore3._1.Models;
 using System.Security.Claims;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
@@ -34,6 +30,23 @@ namespace RealEstateAspNetCore3._1.Controllers
         }
         #endregion
 
+        public ActionResult UpdatePassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult UpdatePassword(UpdatePassword model)
+        {
+            if (ModelState.IsValid)
+            {
+                var userid = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                var user1 = _userManager.FindByIdAsync(userid);
+                var user = _userManager.ChangePasswordAsync(user1.Result, model.OldPassword, model.NewPassword);
+                _context.SaveChangesAsync();
+                return View("UpdateProfileSuccess");
+            }
+            return View(model);
+        }
         //Get 
         public ActionResult Profile()
         {
@@ -52,7 +65,9 @@ namespace RealEstateAspNetCore3._1.Controllers
         [HttpPost]
         public ActionResult Profile(EditProfile model)
         {
-            var user = _userManager.FindByIdAsync(model.id);
+            string userId = _userManager.GetUserId(User);;
+            var user = _userManager.FindByIdAsync(userId);
+           
             user.Result.Name = model.Name;
             user.Result.UserName = model.Username;
             user.Result.Surname = model.Surname;

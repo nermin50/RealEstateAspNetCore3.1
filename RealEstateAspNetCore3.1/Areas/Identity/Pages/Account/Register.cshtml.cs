@@ -63,6 +63,11 @@ namespace RealEstateAspNetCore3._1.Areas.Identity.Pages.Account
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
+            [Required]
+         
+            [Display(Name = "UserName")]
+            public string UserName { get; set; }
+
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
@@ -93,7 +98,7 @@ namespace RealEstateAspNetCore3._1.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 //Yeni application oluştur
-                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
+                var user = new ApplicationUser { UserName = Input.UserName, Email = Input.Email };
                 //  kullanıcının şifresine Hash (şifreleme ) yapar : şifreyi teextten Hexadecimal'e çevirir 
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 // eğer oluşrurmada bir hata çıklazsa true 

@@ -58,8 +58,8 @@ namespace RealEstateAspNetCore3._1.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [EmailAddress]
-            public string Email { get; set; }
+          
+            public string UserName { get; set; }
 
             [Required]
            // [DataType(DataType.Password)]
@@ -99,7 +99,7 @@ namespace RealEstateAspNetCore3._1.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 // Login işlemi yapar Result true ise giriş yapar değil ise yapmaz 
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(Input.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
                     // User giriş işlemin uyarısını gösterir
@@ -107,12 +107,7 @@ namespace RealEstateAspNetCore3._1.Areas.Identity.Pages.Account
                     // giriş yapıldığı sayfaya yönlendir 
                     return LocalRedirect(returnUrl);
                 }
-                // burda kullanıcının profili englemişsek açamaz 
-                if (result.IsLockedOut)
-                {
-                    _logger.LogWarning("User account locked out.");
-                    return RedirectToPage("./Lockout");
-                }
+               
                 else
                 {
                     //Login işlemi başarısız ise bu mesaji gösteirir
