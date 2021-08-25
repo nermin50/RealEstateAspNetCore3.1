@@ -75,5 +75,19 @@ namespace RealEstateAspNetCore3._1.Controllers
             return View(adv);
 
         }
+        /******************************************************************************/
+        // Emlakın durumlarını( Kiralik)  Navbar listeleme fonksyonudur 
+        public PartialViewResult StatusName1()
+        {
+            var statusname1 = _context.Tips.Where(i => i.StatusId == 1).Include(a => a.Status).FirstOrDefault();
+            return PartialView(statusname1);
+        }
+        // Emlakın durumlarını( Satlık ) Navbar listeleme fonksyonudur 
+        public PartialViewResult StatusName2()
+        {
+            var statusname2 = _context.Tips.Where(i => i.StatusId == 2).Include(a => a.Status).FirstOrDefault();
+            return PartialView(statusname2);
+        }
+        /**************************************************************************************/
     }
 }

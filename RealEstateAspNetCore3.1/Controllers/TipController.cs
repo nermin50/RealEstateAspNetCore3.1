@@ -17,6 +17,7 @@ namespace RealEstateAspNetCore3._1.Controllers
         {
             _context = context;
         }
+     
 
         // GET: Tip
         public async Task<IActionResult> Index()
