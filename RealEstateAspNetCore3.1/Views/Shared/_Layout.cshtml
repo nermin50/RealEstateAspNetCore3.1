@@ -41,6 +41,16 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
                         @*Search Partial*@
+                        @using (Html.BeginForm("Search", "Home", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
+
+                        {
+
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="s" placeholder="Search">
+                            </div>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
+
+                        }
 
                         <ul class="nav navbar-nav navbar-left">
                             <li class="dropdown">
@@ -58,10 +68,10 @@
                                 </ul>
                             </li>
                         </ul>
-                        <ul class="nav navbar-nav navbar-right" style="padding-right:10px;">        
-                              @*Login partial sayfasini yukler*@ 
-                                    <partial name="_LoginPartial" />
-                                                       
+                        <ul class="nav navbar-nav navbar-right" style="padding-right:10px;">
+                            @*Login partial sayfasini yukler*@
+                            <partial name="_LoginPartial" />
+
                         </ul>
 
 

@@ -22,6 +22,20 @@ namespace RealEstateAspNetCore3._1.Controllers
             _context = context;
         }
 
+        public ActionResult Search(string s)
+        {
+            var imgs = _context.advPhotos.ToList();
+            ViewBag.imgs = imgs;
+            var search = _context.advertisements.Include(m => m.Neighborhood).Include(b => b.Neighborhood.District)
+                .Include(c => c.Neighborhood.District.City).Include(n => n.Tip).Include(m => m.Tip.Status).AsQueryable(); ;
+            if (!string.IsNullOrEmpty(s))
+            {
+                search = (search.Where(i => i.Description.Contains(s) || i.Neighborhood.NeighborhoodName.Contains(s)
+                || i.Neighborhood.District.City.Name.Contains(s)));
+            }
+
+            return View(search.ToList());
+        }
         public IActionResult Index()
         {
             var imgs = _context.advPhotos.ToList();
