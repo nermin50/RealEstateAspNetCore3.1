@@ -1,0 +1,6 @@
+﻿@model IEnumerable<RealEstateAspNetCore3._1.Models.Tip>
+@foreach (var item in Model)
+{
+    <li><a href="/Home/MenuFilter/@item.TypeId">@item.TypeName</a></li>
+
+}

@@ -49,6 +49,7 @@
                                 @await Component.InvokeAsync("StatusNameOne")
                                 <ul class="dropdown-menu">
                                     @*Emalk tipi listesi1*@
+                                    @await Component.InvokeAsync("StatusTipOne")
 
                                 </ul>
                             </li>
@@ -57,7 +58,7 @@
                                 @await Component.InvokeAsync("StatusNameTwo")
                                 <ul class="dropdown-menu">
                                     @*Emalk tipi listesi2*@
-                                    <!--<li role="separator" class="divider"></li>-->
+                                    @await Component.InvokeAsync("StatusTipTwo")
                                 </ul>
                             </li>
                         </ul>
