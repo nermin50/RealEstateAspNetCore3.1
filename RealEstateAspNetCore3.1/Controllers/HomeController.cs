@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using RealEstateAspNetCore3._1.Models;
@@ -21,6 +22,50 @@ namespace RealEstateAspNetCore3._1.Controllers
             _logger = logger;
             _context = context;
         }
+
+        public PartialViewResult PartialFilter()
+        {
+            ViewBag.citylist = new SelectList(CityGet(), "CityId", "Name");
+            ViewBag.statuslist = new SelectList(statusGet(), "StatusId", "StatusName");
+            return PartialView();
+
+        }
+        public List<City> CityGet()
+        {
+            List<City> cities = _context.cities.ToList();
+            return cities;
+        }
+        public ActionResult DistrictGet(int CityId)
+        {
+            List<District> districtlist = _context.districts.Where(x => x.CityId == CityId).ToList();
+            ViewBag.districtListesi = new SelectList(districtlist, "DistrictId", "DistrictName");
+
+            return PartialView("DistrictPartial");
+        }
+
+        public ActionResult NgbhdGet(int districtid)
+        {
+            List<Neighborhood> neighborhoodlist = _context.neighborhoods.Where(x => x.DistrictId == districtid).ToList();
+            ViewBag.nghbdlistesi = new SelectList(neighborhoodlist, "NeighborhoodId", "NeighborhoodName");
+
+            return PartialView("NgbhdPartial");
+        }
+
+        public List<Status> statusGet()
+        {
+            List<Status> statuses = _context.Status.ToList();
+            return statuses;
+        }
+        public ActionResult typeGet(int statusid)
+        {
+            // because status sub table of Type 
+            List<Tip> typelist = _context.Tips.Where(x => x.StatusId == statusid).ToList();
+            ViewBag.typelistesi = new SelectList(typelist, "TypeId", "TypeName");
+
+
+            return PartialView("TypePartial");
+        }
+
 
         public ActionResult Search(string s)
         {

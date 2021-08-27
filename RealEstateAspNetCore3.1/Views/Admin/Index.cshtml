@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -8,7 +7,8 @@
 
     <div class="row">
         <!--Filtreleme-->
-      
+        @*<partial name="PartialFilter" />*@
+
 
         <br />
         <div class="col-md-9">
@@ -23,10 +23,10 @@
                 <div class="col-md-3">
 
                     <div class="thumbnail">
-                        @*Logo*@ 
+                        @*Logo*@
                         <img src="~/logos/icons8-advertisement-page-100.png" style="border:0; height:50px" />
                         <div class="caption">
-                            @*buttona gidecek sayafya linkini ekledik*@ 
+                            @*buttona gidecek sayafya linkini ekledik*@
                             <p>@Html.ActionLink("Advertisement List", "Index", "advertisement", null, new { @class = "btn btn-success btn-block" })</p>
                         </div>
                     </div>

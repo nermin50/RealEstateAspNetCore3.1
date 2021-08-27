@@ -1,0 +1,131 @@
+﻿@model RealEstateAspNetCore3._1.Models.Advertisement
+
+
+<div class="col-md-3">
+    <br />
+    <!--Filtreleme-->
+    @using (Html.BeginForm("Filter", "Home", FormMethod.Get, new { @class = "form-horizontal" }))
+    {
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Min : </label>
+            <div class="col-sm-8">
+                <input type="text" name="min" class="form-control" palceholder="En Az(fiyat)">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Max :  </label>
+            <div class="col-sm-8">
+                <input type="text" name="max" class="form-control" palceholder="En Cok(fiyat)">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">City : </label>
+            <div class="col-sm-8">
+                @if (ViewBag.citylist != null)
+                {
+                    @Html.DropDownListFor(m => m.CityId, ViewBag.citylist as SelectList, "Select city", new { @class = "form-control" })
+
+                }
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">District : </label>
+            <div class="col-sm-8">
+                @Html.DropDownListFor(m => m.DistrictId, new SelectList(""), "First Choice City Name", new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Neighborhood</label>
+            <div class="col-sm-8">
+                @Html.DropDownListFor(m => m.NeighborhoodId, new SelectList(""), "First Choice district Name", new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Status : </label>
+            <div class="col-sm-8">
+                @if (ViewBag.statuslist != null)
+                {
+                    @Html.DropDownListFor(m => m.StatusId, ViewBag.statuslist as SelectList, ("Select Status Plz "), new { @class = "form-control" })
+                }
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Type : </label>
+            <div class="col-sm-8">
+                @Html.DropDownListFor(m => m.TypeId, new SelectList(""), "First Choice Status Name", new { @class = "form-control" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="" class="col-sm-4 control-label"> </label>
+            <div class="col-sm-8">
+                <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Filitreleme</button>
+            </div>
+        </div>
+
+    }
+
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+<script>
+            $(document).ready(function () {
+                $("#CityId").change(function () {
+                    var sehirid = $(this).val();
+                    debugger
+                    $.ajax({
+                        type: "Post",
+                        url: "/Advertisement/DistrictGet?CityId=" + sehirid,
+                        contentType: "html",
+                        success: function (response) {
+                            debugger
+                            $("#DistrictId").empty();
+                            $("#DistrictId").append(response);
+                        }
+                    })
+                })
+            })
+</script>
+
+<script>
+            $(document).ready(function () {
+                $("#DistrictId").change(function () {
+                    var districtid = $(this).val();
+                    debugger
+                    $.ajax({
+                        type: "Post",
+                        url: "/Advertisement/NgbhdGet?DistrictId=" + districtid,
+                        contentType: "html",
+                        success: function (response) {
+                            debugger
+                            $("#NeighborhoodId").empty();
+                            $("#NeighborhoodId").append(response);
+                        }
+                    })
+                })
+            })
+</script>
+
+
+<!--Status is sub  of Type -->
+<script>
+            $(document).ready(function () {
+                $("#StatusId").change(function () {
+                    var statusid = $(this).val();
+                    debugger
+                    $.ajax({
+                        type: "Post",
+                        url: "/Advertisement/typeGet?statusid=" + statusid,
+                        contentType: "html",
+                        success: function (response) {
+                            debugger
+                            $("#TypeId").empty();
+                            $("#TypeId").append(response);
+                        }
+                    })
+                })
+            })
+</script>
