@@ -23,13 +23,7 @@ namespace RealEstateAspNetCore3._1.Controllers
             _context = context;
         }
 
-        public PartialViewResult PartialFilter()
-        {
-            ViewBag.citylist = new SelectList(CityGet(), "CityId", "Name");
-            ViewBag.statuslist = new SelectList(statusGet(), "StatusId", "StatusName");
-            return PartialView();
-
-        }
+      
         public List<City> CityGet()
         {
             List<City> cities = _context.cities.ToList();
@@ -98,13 +92,7 @@ namespace RealEstateAspNetCore3._1.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public PartialViewResult Slider()
-        {
-            var adv = _context.advertisements.ToList().Take(5);
-            var imgs = _context.advPhotos.ToList();
-            ViewBag.imgs = imgs;
-            return PartialView(adv);
-        }
+       
         //ilanın detayları 
         public ActionResult Details(int id)
         {
