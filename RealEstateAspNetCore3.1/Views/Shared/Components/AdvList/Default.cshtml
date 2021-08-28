@@ -1,0 +1,56 @@
+﻿@model IEnumerable<RealEstateAspNetCore3._1.Models.Advertisement>
+
+@foreach (var item in Model)
+{
+    var c = 1;
+    <div class="col-sm-6 col-md-3">
+        <div class="thumbnail">
+            @foreach (var rsm in ViewBag.imgs)
+            {
+                if (rsm.AdvId == item.AdvId)
+                {
+                    if (@c == 1)
+                    {
+                        //ilanın detaylarına gitmek için aşağıdaki url üzerinden gidilir
+                        <a href="/Home/Details/@item.AdvId">  <img src="~/Uploads/@rsm.AdvPhotoName" alt="..." style="height:300px;"></a>
+                        c++;
+                    }
+
+                }
+
+            }
+            @foreach (var rsm in ViewBag.imgs)
+            {
+                if (rsm.AdvId != item.AdvId)
+                {
+                    if (@c == 1)
+                    {
+                        <a href="/Home/Details/@item.AdvId">  <img src="~/logos/icons8-unknown-status-100.png" alt="..." style="height:300px;"></a>
+                        c++;
+                    }
+
+                }
+
+            }
+
+            <div class="caption">
+                <p><strong>@item.Tip.Status.StatusName</strong> (@item.Tip.TypeName) </p>
+                <p>@item.Neighborhood.District.City.Name  - @item.Neighborhood.District.DistrictName</p>
+                <p>
+                    <button class="btn btn-danger"><i class="fa fa-usd" aria-hidden="true"></i> @item.Price </button>
+                    <button class="btn btn-primary">@item.Area m<sup>2</sup></button>
+                    <button class="btn btn-success pull-right"><i class="fa fa-bed" aria-hidden="true"></i> @item.NumOfRoom</button>
+
+                </p>
+                <div style="align-items: center; display: flex;justify-content: center;">
+                    <button class="btn btn-success btn-block" style="border: 3px solid green;" onclick="location.href='/Home/Details/@item.AdvId'" type="button">
+                        For More details click here
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+

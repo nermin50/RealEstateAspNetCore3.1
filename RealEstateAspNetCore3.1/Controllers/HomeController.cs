@@ -83,13 +83,8 @@ namespace RealEstateAspNetCore3._1.Controllers
         }
         public IActionResult Index()
         {
-            var imgs = _context.advPhotos.ToList();
-            ViewBag.imgs = imgs;
-
-            var adv = _context.advertisements.Include(l => l.Neighborhood).Include(n => n.Neighborhood.District).
-                Include(m => m.Neighborhood.District.City).Include(e => e.Tip).Include(e => e.Tip.Status).OrderByDescending(i => i.AdvId); ;
-            //ModelState.Clear();
-            return View(adv.ToList());
+        
+            return View();
         }
 
         public IActionResult Privacy()
