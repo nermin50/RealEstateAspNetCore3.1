@@ -24,6 +24,14 @@ namespace RealEstateAspNetCore3._1.Controllers
         }
 
 
+        public ActionResult MenuFilter(int id)
+        {
+            var imgs = _context.advPhotos.ToList();
+            ViewBag.imgs = imgs;
+            var filter = _context.advertisements.Where(i => i.TypeId == id).Include(l => l.Neighborhood).Include(n => n.Neighborhood.District).
+                Include(m => m.Neighborhood.District.City).Include(e => e.Tip).Include(e => e.Tip.Status).ToList();
+            return View(filter);
+        }
         public ActionResult Filter(int? min, int? max, int? cityid, int? districtid, int? nghdid, int? stautsid, int? typeid)
         {
             var imgs = _context.advPhotos.ToList();
