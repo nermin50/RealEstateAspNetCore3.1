@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using RealEstateAspNetCore3._1.Models;
 
 namespace RealEstateAspNetCore3._1.Controllers
 {
+    [Authorize(Roles = ("admin"))]
     public class StatusController : Controller
     {
         private readonly DataContext _context;

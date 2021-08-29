@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using RealEstateAspNetCore3._1.Models;
 
 namespace RealEstateAspNetCore3._1.Controllers
 {
+    [Authorize(Roles = ("admin"))]
     public class DistrictController : Controller
     {
         private readonly DataContext _context;
@@ -18,6 +20,7 @@ namespace RealEstateAspNetCore3._1.Controllers
             _context = context;
         }
 
+        /// مفتوح للكل  
         // GET: District
         public async Task<IActionResult> Index()
         {
@@ -25,6 +28,7 @@ namespace RealEstateAspNetCore3._1.Controllers
             return View(await dataContext.ToListAsync());
         }
 
+      
         // GET: District/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -43,7 +47,7 @@ namespace RealEstateAspNetCore3._1.Controllers
 
             return View(district);
         }
-
+     
         // GET: District/Create
         public IActionResult Create()
         {
@@ -68,6 +72,7 @@ namespace RealEstateAspNetCore3._1.Controllers
             return View(district);
         }
 
+    
         // GET: District/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -121,6 +126,7 @@ namespace RealEstateAspNetCore3._1.Controllers
             return View(district);
         }
 
+     
         // GET: District/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -42,6 +43,14 @@ namespace RealEstateAspNetCore3._1
             services.AddHttpContextAccessor();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddRazorPages();
+
+            //yetkilendirme işlemi  
+            services.AddMvc();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie();
+            services.AddAuthorization();
+            services.ConfigureApplicationCookie(options => options.LoginPath = "/Identity/Account/Login");
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,11 +72,15 @@ namespace RealEstateAspNetCore3._1
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            
             app.UseAuthentication();
-
-            app.UseEndpoints(endpoints =>
+            app.UseAuthorization();
+            //app.UseSession();
+           
+           app.UseEndpoints(endpoints =>
             {
+                //Kontrollerin haritalaması 
+                endpoints.MapControllers();
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

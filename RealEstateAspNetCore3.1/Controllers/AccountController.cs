@@ -5,9 +5,12 @@ using RealEstateAspNetCore3._1.Models;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RealEstateAspNetCore3._1.Controllers
 {
+    [Authorize(Roles = "user")]
+    [Authorize(Roles = ("admin"))] // admin ve user şifre ve profil güncellemesi yapabilir 
     public class AccountController : Controller
     {
         private readonly IdentityDataContext _context;
@@ -47,6 +50,7 @@ namespace RealEstateAspNetCore3._1.Controllers
             }
             return View(model);
         }
+      
         //Get 
         public ActionResult Profile()
         {

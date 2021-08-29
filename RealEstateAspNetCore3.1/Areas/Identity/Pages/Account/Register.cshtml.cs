@@ -104,6 +104,7 @@ namespace RealEstateAspNetCore3._1.Areas.Identity.Pages.Account
                 // eğer oluşrurmada bir hata çıklazsa true 
                 if (result.Succeeded)
                 {
+                    _userManager.AddToRoleAsync(user, "user").Wait();
                     //kaut oluşturludu 
                     _logger.LogInformation("User created a new account with password.");
                     //Giriş Yap 
