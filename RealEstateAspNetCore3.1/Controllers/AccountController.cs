@@ -9,8 +9,8 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace RealEstateAspNetCore3._1.Controllers
 {
-    [Authorize(Roles = "user")]
-    [Authorize(Roles = ("admin"))] // admin ve user şifre ve profil güncellemesi yapabilir 
+     
+    [Authorize(Roles = ("admin,user"))] // admin ve user şifre ve profil güncellemesi yapabilir 
     public class AccountController : Controller
     {
         private readonly IdentityDataContext _context;
@@ -33,6 +33,14 @@ namespace RealEstateAspNetCore3._1.Controllers
         }
         #endregion
 
+
+        
+        public ActionResult UserList()
+        {
+            var u = _userManager.Users;
+            return View(u);
+
+        }
         public ActionResult UpdatePassword()
         {
             return View();
