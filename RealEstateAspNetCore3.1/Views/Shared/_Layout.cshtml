@@ -39,12 +39,16 @@
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
+                   
                         @*Search Partial*@
                          @await Component.InvokeAsync("SearchPartial")
 
                         <ul class="nav navbar-nav navbar-left">
+                            <li>
+                                <a asp-controller="Home" asp-action="ContactUs">iletişim</a>
+                            </li>
                             <li class="dropdown">
+
                                 @*Emlak durum filtre1*@
                                 @await Component.InvokeAsync("StatusNameOne")
                                 <ul class="dropdown-menu">

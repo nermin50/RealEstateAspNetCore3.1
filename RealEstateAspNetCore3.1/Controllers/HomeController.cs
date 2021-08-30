@@ -126,6 +126,11 @@ namespace RealEstateAspNetCore3._1.Controllers
             return View(adv);
 
         }
+
+        public ActionResult ContactUs()
+        {
+            return View();
+        }
       
     }
 }
