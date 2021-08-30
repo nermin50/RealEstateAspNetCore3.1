@@ -1,0 +1,67 @@
+﻿@model RealEstateAspNetCore3._1.Models.FooterLink
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>FooterLink</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="FooterId" />
+            <div class="form-group">
+                <label asp-for="facebook" class="control-label"></label>
+                <input asp-for="facebook" class="form-control" />
+                <span asp-validation-for="facebook" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="twitter" class="control-label"></label>
+                <input asp-for="twitter" class="form-control" />
+                <span asp-validation-for="twitter" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="instagram" class="control-label"></label>
+                <input asp-for="instagram" class="form-control" />
+                <span asp-validation-for="instagram" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="youtube" class="control-label"></label>
+                <input asp-for="youtube" class="form-control" />
+                <span asp-validation-for="youtube" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="googlemap" class="control-label"></label>
+                <input asp-for="googlemap" class="form-control" />
+                <span asp-validation-for="googlemap" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="email" class="control-label"></label>
+                <input asp-for="email" class="form-control" />
+                <span asp-validation-for="email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="address" class="control-label"></label>
+                <input asp-for="address" class="form-control" />
+                <span asp-validation-for="address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="whatsapp" class="control-label"></label>
+                <input asp-for="whatsapp" class="form-control" />
+                <span asp-validation-for="whatsapp" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

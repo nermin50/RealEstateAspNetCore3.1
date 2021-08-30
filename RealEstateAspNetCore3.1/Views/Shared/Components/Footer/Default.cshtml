@@ -1,0 +1,93 @@
+﻿@model IEnumerable<RealEstateAspNetCore3._1.Models.FooterLink>
+
+@foreach (var item in Model)
+{
+    <div class="col-md-3">
+
+
+        <h5 class="text" style="color:white"><i class="fa fa-envelope-o fa-2x" aria-hidden="true"></i> @item.email  </h5>
+
+
+        <h5 class="text-uppercase" style="color:white"><i class="fa fa-volume-control-phone fa-2x" aria-hidden="true"></i>@item.whatsapp</h5>
+
+
+        <h5 class="text-uppercase" style="color:white"><i class="fa fa-map-marker fa-2x" aria-hidden="true"></i> >@item.address </h5>
+
+
+
+        <h5 class="text-uppercase" style="color:white"><i class="fa fa-whatsapp fa-2x" aria-hidden="true"></i>@item.whatsapp</h5>
+
+
+
+    </div>
+    <div class="col-md-3 ">
+        <h5 class="text" style="color:white">Follow Us </h5>
+        <ul class="list-unstyled">
+            <li>
+
+                <section class="mb-4">
+                    <!-- Facebook -->
+
+                    <a class="btn btn-primary btn-floating m-1"
+                       style="background-color: #3b5998;"
+                       href="@item.facebook"
+                       role="button"
+                       target="_blank">
+                        <i class="fa fa-facebook-f fa-2x"></i>
+                    </a>
+
+
+
+                    <!-- Twitter -->
+
+                    <a class="btn btn-primary btn-floating m-1"
+                       style="background-color: #55acee;"
+                       href="@item.twitter"
+                       role="button"
+                       target="_blank">
+                        <i class="fa fa-twitter fa-2x"></i>
+                    </a>
+
+
+
+
+
+                    <!-- Instagram -->
+
+                    <a class="btn btn-primary btn-floating m-1"
+                       style="background-color: #ac2bac;"
+                       href="@item.instagram"
+                       role="button"
+                       target="_blank">
+                        <i class="fa fa-instagram  fa-2x"></i>
+                    </a>
+
+
+                    <!-- youtube -->
+
+                    <a id="box" class="btn btn-primary btn-floating m-1"
+                       style="background-color: #cf3434;"
+                       href="@item.youtube"
+                       role="button"
+                       target="_blank">
+                        <i class="fa fa-youtube fa-2x"></i>
+                    </a>
+
+
+
+
+
+                </section>
+            </li>
+
+        </ul>
+
+    </div>
+    <section>
+        <div class="col-md-3">
+
+            <iframe src="@item.googlemap" width="200" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </section>
+
+}

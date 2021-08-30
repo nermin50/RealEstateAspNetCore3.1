@@ -27,6 +27,9 @@ namespace RealEstateAspNetCore3._1.Models
 
         public DbSet<Neighborhood> neighborhoods { get; set; }
 
+        public DbSet<FooterLink> footerLinks { get; set; }
+
+
 
     }
 }
