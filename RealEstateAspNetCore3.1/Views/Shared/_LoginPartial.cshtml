@@ -6,28 +6,28 @@
 
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
-
-
-
-
-@*// Eğer girişi yapıldı ise*@ 
+@*// Eğer girişi yapıldı ise*@
 @if (User.Identity.IsAuthenticated)
 {
- //   Eğer girişi yapan kullanıcı Admin ise bu linkleri göster ( sadece admin için
+    //   Eğer girişi yapan kullanıcı Admin ise bu linkleri göster ( sadece admin için
     @if (User.IsInRole("admin"))
     {
         <li>  <a class="btn btn-group-sm" href="/Admin/Index">Admin Panel </a></li>
 
     }
-    <li> <a href="/Account/Profile" id="manage" class="btn btn-link" title="Welcome">Hello @UserManager.GetUserName(User)..!</a></li>
+    @*<li> <a href="/Account/Profile" id="manage" class="btn btn-link" title="Welcome">Hello @UserManager.GetUserName(User)..!</a></li>*@
+    <li><a asp-controller="Advertisement" asp-action="Create" class="btn btn-link" >ilan Oluştur</a></li>
+    <li> <a asp-controller="Advertisement" asp-action="Index" id="manage" class="btn btn-link" title="Welcome">İlanlarım</a></li>
 
-   // burdaki linkler admin ve normal kullanıcı için gösterir
+
+    // burdaki linkler admin ve normal kullanıcı için gösterir
     <div class=" nav navbar-nav navbar-right " style="padding-top:10px;">
         <form id="logoutForm" class="form-inline " asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
             <button id="logout" type="submit" class="nav-link btn btn-danger text-dark">Logout</button>
+
         </form>
     </div>
-   
+
 }
 // eğer giriş yapılmadı ise Login ve Register buttonları gösteriri
 else
@@ -37,6 +37,9 @@ else
 
 
     <a id="login" asp-area="Identity" asp-page="/Account/Login" class="btn btn-success" style="margin-top: 10px;"><i class="fa fa-users"></i>Login</a>
+
+    <a id="login" asp-area="Identity" asp-page="/Account/Login" class="btn btn-primary" style="margin-top: 10px;">ilan Oluştur</a>
+
 
 }
 

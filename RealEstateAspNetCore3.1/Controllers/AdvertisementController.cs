@@ -137,7 +137,8 @@ namespace RealEstateAspNetCore3._1.Controllers
         // GET: Advertisement
         public async Task<IActionResult> Index()
         {
-            var dataContext = _context.advertisements.Include(a => a.Neighborhood).Include(b => b.Neighborhood.District)
+            var username = User.Identity.Name;
+            var dataContext = _context.advertisements.Where(i => i.UserName == username).Include(a => a.Neighborhood).Include(b => b.Neighborhood.District)
                 .Include(c => c.Neighborhood.District.City).Include(n=> n.Tip).Include(m => m.Tip.Status);
             return View(await dataContext.ToListAsync());
         }
@@ -166,7 +167,7 @@ namespace RealEstateAspNetCore3._1.Controllers
         {
             //for list city and district to create page
             ViewBag.citylist = new SelectList(CityGet(), "CityId", "Name");
-
+            ViewBag.Name = User.Identity.Name;
             ViewBag.statuslist = new SelectList(statusGet(), "StatusId", "StatusName"); return View();
         }
 
@@ -179,6 +180,7 @@ namespace RealEstateAspNetCore3._1.Controllers
         {
             if (ModelState.IsValid)
             {
+                advertisement.UserName = User.Identity.Name;
                 _context.Add(advertisement);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
