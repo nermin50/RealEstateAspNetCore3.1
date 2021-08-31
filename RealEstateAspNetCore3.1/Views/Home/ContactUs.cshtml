@@ -7,9 +7,9 @@
 <style>
     .contact-form {
         background: #fff;
-        margin-top: 10%;
+        margin-top: 1%;
         margin-bottom: 5%;
-        width: 100%;
+        width: 80%;
     }
 
         .contact-form .form-control {
@@ -70,7 +70,7 @@
     @using (Html.BeginForm("Contact", "Home", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
-
+        
         <h3>Send to Us a Message</h3>
         <div class="row">
             <div class="col-md-6">

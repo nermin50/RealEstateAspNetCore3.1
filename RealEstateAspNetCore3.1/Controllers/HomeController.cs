@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace RealEstateAspNetCore3._1.Controllers
@@ -131,6 +133,29 @@ namespace RealEstateAspNetCore3._1.Controllers
         {
             return View();
         }
-      
+        [HttpPost]
+
+        public ActionResult Contact(ContactUs contact)
+        {
+            var mail = new MailMessage();
+            var loginInfo = new NetworkCredential("ddeneme96390@gmail.com", "deneme123");
+            mail.From = new MailAddress(contact.Email);
+            mail.To.Add(new MailAddress("ddeneme96390@gmail.com"));
+            mail.Subject = "Mail From Website ";
+            mail.IsBodyHtml = true;
+            string body = "Sender Name : " + contact.Name + "<br>" +
+                            "Email :  " + contact.Email + "<br>" +
+                            "Telephone : " + contact.Telephone + "<br>" +
+                            "Messege :: <b>" + contact.Message + "</b>";
+            mail.Body = body;
+
+            var smtpClient = new SmtpClient("smtp.gmail.com", 587);
+            smtpClient.EnableSsl = true;
+            smtpClient.Credentials = loginInfo;
+            smtpClient.Send(mail);
+            TempData["SuccessfulSende"] = "işlem başarılı ";
+            return RedirectToAction("Index");
+        }
+
     }
 }

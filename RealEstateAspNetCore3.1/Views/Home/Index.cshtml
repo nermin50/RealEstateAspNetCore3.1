@@ -8,7 +8,15 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
 
 <div class="container">
-
+    <br />
+    @if (TempData["SuccessfulSende"] != null)
+    {
+        <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h4>	<i class="icon fa fa-check"></i> Mesajınız : </h4>
+            Başarıyla gönderilidi ............
+        </div>
+    }
 
     <br />
     <div class="row">
@@ -49,7 +57,7 @@
 
     </div>
 
- 
+
     -
 
 
