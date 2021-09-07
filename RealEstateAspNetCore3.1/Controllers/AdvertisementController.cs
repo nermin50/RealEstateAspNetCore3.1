@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,7 @@ using RealEstateAspNetCore3._1.Models;
 
 namespace RealEstateAspNetCore3._1.Controllers
 {
+    [Authorize(Roles = ("admin,user"))]
     public class AdvertisementController : Controller
     {
         private readonly DataContext _context;
