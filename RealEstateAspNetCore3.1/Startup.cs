@@ -63,7 +63,7 @@ namespace RealEstateAspNetCore3._1
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseDeveloperExceptionPage();
             }
             // proje ilk başladığında Seed fonksyonunu çalıştırır 
             IdentityInitilizer.Seed(userManger, roleManager);
