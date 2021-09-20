@@ -235,7 +235,8 @@ namespace RealEstateAspNetCore3._1.Controllers
             // Giriş yapan kullanıcı Adını Listeler 
             ViewBag.Name = User.Identity.Name;
             // Emlak Durumlarını Listeler ( Status = Durum ) 
-            ViewBag.statuslist = new SelectList(statusGet(), "StatusId", "StatusName"); return View();
+            ViewBag.statuslist = new SelectList(statusGet(), "StatusId", "StatusName");
+            return View();
         }
 
         // POST: Advertisement/Create
@@ -284,9 +285,13 @@ namespace RealEstateAspNetCore3._1.Controllers
                 // Veri bulunmadı 
                 return NotFound();
             }
-            // Mahalları Listele 
-            ViewData["NeighborhoodId"] = new SelectList(_context.neighborhoods, "NeighborhoodId", "NeighborhoodId", advertisement.NeighborhoodId);
-           // ilan modeli gönder sayafaya 
+            ViewBag.citylist = new SelectList(CityGet(), "CityId", "Name");
+            ViewBag.statuslist = new SelectList(statusGet(), "StatusId", "StatusName");
+
+            ViewBag.districtId = new SelectList(_context.districts, "DistrictId", "DistrictName", advertisement.DistrictId);
+            ViewBag.NeighborhoodId = new SelectList(_context.neighborhoods, "NeighborhoodId", "NeighborhoodName", advertisement.NeighborhoodId);
+            ViewBag.TypeId = new SelectList(_context.Tips, "TypeId", "TypeName", advertisement.TypeId);
+            // ilan modeli gönder sayafaya 
             return View(advertisement);
         }
 
@@ -295,7 +300,7 @@ namespace RealEstateAspNetCore3._1.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AdvId,Description,Price,NumOfRoom,NumOfBath,Credit,Area,Floor,Feature,Telephone,Addres,CityId,DistrictId,StatusId,NeighborhoodId,TypeId")] Advertisement advertisement)
+        public async Task<IActionResult> Edit(int id, [Bind("AdvId,Description,Price,NumOfRoom,NumOfBath,Credit,Area,Floor,Feature,Telephone,Addres,UserName,CityId,DistrictId,StatusId,NeighborhoodId,TypeId")] Advertisement advertisement)
         {
             // Post Metodu 
             // eğer post yaptığında id yi bulmazsa 
