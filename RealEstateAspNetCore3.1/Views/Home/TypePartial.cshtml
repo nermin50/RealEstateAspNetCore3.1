@@ -1,0 +1,9 @@
+﻿<option> Now Choose</option>
+@if (ViewBag.typelistesi != null)
+{
+    foreach (var item in ViewBag.typelistesi)
+    {
+        <option value="@item.Value"> @item.Text</option>
+    }
+
+}

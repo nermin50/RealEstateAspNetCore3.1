@@ -70,63 +70,63 @@
 
 </div>
 
-<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
 
 <script>
-            $(document).ready(function () {
-                $("#CityId").change(function () {
-                    var sehirid = $(this).val();
+    $(document).ready(function () {
+        $("#CityId").change(function () {
+            var sehirid = $(this).val();
+            debugger
+            $.ajax({
+                type: "Post",
+                url: "/Home/DistrictGet?CityId=" + sehirid,
+                contentType: "html",
+                success: function (response) {
                     debugger
-                    $.ajax({
-                        type: "Post",
-                        url: "/Advertisement/DistrictGet?CityId=" + sehirid,
-                        contentType: "html",
-                        success: function (response) {
-                            debugger
-                            $("#DistrictId").empty();
-                            $("#DistrictId").append(response);
-                        }
-                    })
-                })
+                    $("#DistrictId").empty();
+                    $("#DistrictId").append(response);
+                }
             })
+        })
+    })
 </script>
 
 <script>
-            $(document).ready(function () {
-                $("#DistrictId").change(function () {
-                    var districtid = $(this).val();
+    $(document).ready(function () {
+        $("#DistrictId").change(function () {
+            var districtid = $(this).val();
+            debugger
+            $.ajax({
+                type: "Post",
+                url: "/Home/NgbhdGet?DistrictId=" + districtid,
+                contentType: "html",
+                success: function (response) {
                     debugger
-                    $.ajax({
-                        type: "Post",
-                        url: "/Advertisement/NgbhdGet?DistrictId=" + districtid,
-                        contentType: "html",
-                        success: function (response) {
-                            debugger
-                            $("#NeighborhoodId").empty();
-                            $("#NeighborhoodId").append(response);
-                        }
-                    })
-                })
+                    $("#NeighborhoodId").empty();
+                    $("#NeighborhoodId").append(response);
+                }
             })
+        })
+    })
 </script>
 
 
 <!--Status is sub  of Type -->
 <script>
-            $(document).ready(function () {
-                $("#StatusId").change(function () {
-                    var statusid = $(this).val();
+    $(document).ready(function () {
+        $("#StatusId").change(function () {
+            var statusid = $(this).val();
+            debugger
+            $.ajax({
+                type: "Post",
+                url: "/Home/typeGet?statusid=" + statusid,
+                contentType: "html",
+                success: function (response) {
                     debugger
-                    $.ajax({
-                        type: "Post",
-                        url: "/Advertisement/typeGet?statusid=" + statusid,
-                        contentType: "html",
-                        success: function (response) {
-                            debugger
-                            $("#TypeId").empty();
-                            $("#TypeId").append(response);
-                        }
-                    })
-                })
+                    $("#TypeId").empty();
+                    $("#TypeId").append(response);
+                }
             })
+        })
+    })
 </script>

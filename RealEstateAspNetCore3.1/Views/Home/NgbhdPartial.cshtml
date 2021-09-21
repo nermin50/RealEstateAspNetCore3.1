@@ -1,0 +1,9 @@
+﻿<option> Now Select Neiborhood </option>
+
+@if (ViewBag.nghbdlistesi != null)
+{
+    foreach (var item in ViewBag.nghbdlistesi)
+    {
+        <option value="@item.Value"> @item.Text</option>
+    }
+}

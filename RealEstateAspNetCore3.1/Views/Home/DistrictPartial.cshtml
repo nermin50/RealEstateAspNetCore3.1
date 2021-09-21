@@ -1,0 +1,9 @@
+﻿
+<option>Now Choice District Name </option>
+@if (ViewBag.districtListesi != null)
+{
+    foreach (var item in ViewBag.districtListesi)
+    {
+        <option value="@item.Value"> @item.Text </option>
+    }
+}
